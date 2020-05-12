@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/image_home"
+        android:layout_width="64dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/team_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/english_premier_league" />
+
+    <ImageView
+        android:id="@+id/image_away"
+        android:layout_width="64dp"
+        android:layout_height="73dp"
+        android:contentDescription="@string/team_away"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/english_premier_league" />
+
+    <TextView
+        android:id="@+id/name_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/team_home"
+        app:layout_constraintStart_toStartOf="@+id/image_home"
+        app:layout_constraintTop_toBottomOf="@+id/image_home" />
+
+    <TextView
+        android:id="@+id/name_away"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/team_away"
+        app:layout_constraintStart_toStartOf="@+id/image_away"
+        app:layout_constraintTop_toBottomOf="@+id/image_away" />
+
+    <TextView
+        android:id="@+id/score_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/score_home"
+        app:layout_constraintEnd_toStartOf="@+id/line"
+        app:layout_constraintStart_toEndOf="@+id/image_home"
+        app:layout_constraintTop_toBottomOf="@+id/date_match" />
+
+    <TextView
+        android:id="@+id/score_away"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="92dp"
+        android:text="@string/score_away"
+        app:layout_constraintEnd_toStartOf="@+id/image_away"
+        app:layout_constraintStart_toEndOf="@+id/line"
+        app:layout_constraintTop_toBottomOf="@+id/date_match" />
+
+    <TextView
+        android:id="@+id/full_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/fulltime"
+        app:layout_constraintEnd_toStartOf="@+id/score_away"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toEndOf="@+id/score_home"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/line"
+        app:layout_constraintEnd_toStartOf="@+id/score_away"
+        app:layout_constraintStart_toEndOf="@+id/score_home"
+        app:layout_constraintTop_toBottomOf="@+id/date_match" />
+
+    <TextView
+        android:id="@+id/date_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/date_match"
+        app:layout_constraintEnd_toStartOf="@+id/image_away"
+        app:layout_constraintStart_toEndOf="@+id/image_home"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

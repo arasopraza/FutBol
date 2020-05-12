@@ -2,16 +2,21 @@ package com.smk.futbol
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private var items: MutableList<League> = mutableListOf()
 
+    companion object {
+        const val LEAGUE_DATA = "league_data"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        league_list.setHasFixedSize(true)
         initData()
         showRecyclerView()
     }
@@ -31,10 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerView() {
-        league_list.layoutManager = GridLayoutManager(this, 2)
-        league_list.adapter = LeagueAdapter(this, items){
-            val toast = Toast.makeText(applicationContext, it.name, Toast.LENGTH_SHORT)
-                toast.show()
-        }
+        league_list.layoutManager = LinearLayoutManager( this)
+        league_list.adapter = LeagueAdapter(items)
     }
 }
