@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".ui.DetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,13 +18,13 @@
         android:id="@+id/cardView"
         android:layout_width="413dp"
         android:layout_height="355dp"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/image_item"
+            android:id="@+id/image_league"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="60dp"
@@ -33,7 +33,7 @@
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/name_item"
+            android:id="@+id/name_league"
             android:layout_width="112dp"
             android:layout_height="25dp"
             android:layout_marginTop="180dp"

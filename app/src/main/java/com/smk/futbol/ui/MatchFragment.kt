@@ -1,4 +1,4 @@
-package com.smk.futbol
+package com.smk.futbol.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.smk.futbol.model.Leaguee
+import com.smk.futbol.R
 import kotlinx.android.synthetic.main.fragment_match.*
 
 class MatchFragment : Fragment() {
-    private var items: MutableList<League> = mutableListOf()
+    private var items: MutableList<Leaguee> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +34,7 @@ class MatchFragment : Fragment() {
         items.clear()
         for (i in name.indices) {
             items.add(
-                League(
+                Leaguee(
                     name[i],
                     image.getResourceId(i, 0)
                 )

@@ -1,10 +1,10 @@
-package com.smk.futbol.ui
+package com.smk.futbol
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.smk.futbol.Leaguee
-import com.smk.futbol.R
+import com.smk.futbol.model.Leaguee
+import com.smk.futbol.ui.LeagueAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

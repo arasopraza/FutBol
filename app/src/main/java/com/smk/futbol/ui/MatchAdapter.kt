@@ -1,4 +1,4 @@
-package com.smk.futbol
+package com.smk.futbol.ui
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.smk.futbol.ui.DetailMatchActivity
+import com.smk.futbol.model.Leaguee
+import com.smk.futbol.MainActivity
+import com.smk.futbol.R
 import kotlinx.android.synthetic.main.item_list_match.view.*
 
-class MatchAdapter(private val league: List<League>)
+class MatchAdapter(private val leaguee: List<Leaguee>)
     : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -18,10 +20,10 @@ class MatchAdapter(private val league: List<League>)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = league.size
+    override fun getItemCount(): Int = leaguee.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(league[position])
+        holder.bindItem(leaguee[position])
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,7 +32,7 @@ class MatchAdapter(private val league: List<League>)
         private val imageHome = itemView.image_home
         private val imageAway = itemView.image_home
 
-        fun bindItem(items: League) {
+        fun bindItem(items: Leaguee) {
             with(itemView) {
                 Glide.with(itemView.context)
                     .load(items.image)

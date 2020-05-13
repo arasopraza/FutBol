@@ -38,27 +38,15 @@
 
     </string-array>
     <string-array name="match_name">
-        <item>English Premier League</item>
-        <item>French Ligue 1</item>
-        <item>German Bundesliga</item>
-        <item>Italian Seria A</item>
-        <item>Spanish La Liga</item>
-        <item>American Mayor League</item>
-        <item>Protugeuese Premiera Liga</item>
-        <item>Australian A League</item>
-        <item>Scotish Premier League</item>
-        <item>English League</item>
-    </string-array>
-    <string-array name="match_image">
-        <item>@drawable/english_premier_league</item>
-        <item>@drawable/french_ligue_1</item>
-        <item>@drawable/german_bundesliga</item>
-        <item>@drawable/italian_serie_a</item>
-        <item>@drawable/spanish_la_liga</item>
-        <item>@drawable/american_mayor_league</item>
-        <item>@drawable/portugeuese_premiera_liga</item>
-        <item>@drawable/australian_a_league</item>
-        <item>@drawable/scotish_premier_league</item>
-        <item>@drawable/english_league_1</item>
+        <item>EnglishPL</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Spanish</item>
+        <item>American</item>
+        <item>Protugeuese</item>
+        <item>Australian</item>
+        <item>Scotish</item>
+        <item>English</item>
     </string-array>
 </resources>

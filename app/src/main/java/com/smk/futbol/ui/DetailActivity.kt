@@ -1,4 +1,4 @@
-package com.smk.futbol
+package com.smk.futbol.ui
 
 
 import android.app.SearchManager
@@ -9,12 +9,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.smk.futbol.MainActivity.Companion.LEAGUE_DATA
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.smk.futbol.R
+import com.smk.futbol.model.Leaguee
+import com.smk.futbol.ui.detail.LeagueDetailViewModel
+import com.smk.futbol.ui.detail.LeagueDetailViewState
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
+    private lateinit var viewModel: LeagueDetailViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,17 +28,17 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.title = "Detail League"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val viewPagerAdapter = ViewPagerAdapter(this, supportFragmentManager)
+        val viewPagerAdapter =
+            ViewPagerAdapter(this, supportFragmentManager)
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
 
-        val tvName = name_item
-        val items = intent.getParcelableExtra<League>(LEAGUE_DATA)
-        tvName.text = items?.name
-        Glide.with(this)
-            .load(items?.image)
-            .apply(RequestOptions().override(55, 55))
-            .into(image_item)
+        viewModel = ViewModelProviders.of(this).get(LeagueDetailViewModel::class.java).apply {
+            viewState.observe(
+                this@DetailActivity,
+                Observer(this@DetailActivity::handleState)
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -64,5 +69,13 @@ class DetailActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun handleState(viewState: LeagueDetailViewState) {
+        viewState.data?.let { showDetail(it) }
+    }
+
+    private fun showDetail(data: Leaguee) {
+        name_league.text = data.name
     }
 }
