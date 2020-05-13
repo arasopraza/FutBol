@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.smk.futbol.MainActivity.Companion.LEAGUE_DATA
+import com.smk.futbol.ui.DetailActivity
 import kotlinx.android.synthetic.main.item_list_league.view.*
 
 class LeagueAdapter(private val league: List<League>)

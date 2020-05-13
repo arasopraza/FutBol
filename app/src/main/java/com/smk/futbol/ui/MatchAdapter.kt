@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.smk.futbol.ui.DetailMatchActivity
 import kotlinx.android.synthetic.main.item_list_match.view.*
 
 class MatchAdapter(private val league: List<League>)
