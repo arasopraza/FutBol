@@ -3,16 +3,16 @@ package com.smk.futbol.ui
 
 import android.app.SearchManager
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.smk.futbol.R
-import com.smk.futbol.model.Leaguee
+import com.smk.futbol.model.League
 import com.smk.futbol.ui.detail.LeagueDetailViewModel
 import com.smk.futbol.ui.detail.LeagueDetailViewState
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -33,12 +33,14 @@ class DetailActivity : AppCompatActivity() {
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
 
-        viewModel = ViewModelProviders.of(this).get(LeagueDetailViewModel::class.java).apply {
+//        val factory = LeagueDetailViewModelFactory(LeagueRepository.instance)
+        viewModel = ViewModelProvider(this)[LeagueDetailViewModel::class.java].apply {
             viewState.observe(
                 this@DetailActivity,
                 Observer(this@DetailActivity::handleState)
             )
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -71,11 +73,14 @@ class DetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun handleState(viewState: LeagueDetailViewState) {
-        viewState.data?.let { showDetail(it) }
+    private fun handleState(viewState: LeagueDetailViewState?) {
+        viewState?.datadetail?.let { showDetail(it) }
     }
 
-    private fun showDetail(data: Leaguee) {
-        name_league.text = data.name
+    private fun showDetail(data: League) {
+        name_league.text = data.leagueName
     }
 }
+
+
+

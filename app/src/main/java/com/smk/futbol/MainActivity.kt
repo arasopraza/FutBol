@@ -1,8 +1,9 @@
 package com.smk.futbol
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.smk.futbol.model.League
 import com.smk.futbol.model.Leaguee
 import com.smk.futbol.ui.LeagueAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,12 +25,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initData(){
+        val id = resources.getStringArray(R.array.league_id)
         val name = resources.getStringArray(R.array.league_name)
         val image = resources.obtainTypedArray(R.array.league_image)
         items.clear()
         for (i in name.indices) {
             items.add(
                 Leaguee(
+                    id[i],
                     name[i],
                     image.getResourceId(i, 0)
                 )

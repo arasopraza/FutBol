@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.smk.futbol.model.Leaguee
 import com.smk.futbol.R
+import com.smk.futbol.model.Event
+import com.smk.futbol.model.League
 import kotlinx.android.synthetic.main.fragment_match.*
 
 class MatchFragment : Fragment() {
-    private var items: MutableList<Leaguee> = mutableListOf()
+    private var items: MutableList<Event> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,30 +25,32 @@ class MatchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         match_list?.setHasFixedSize(true)
-        initData()
-        showRecyclerView()
+//        initData()
+//        showRecyclerView()
     }
 
-    private fun initData() {
-        val name = resources.getStringArray(R.array.match_name)
-        val image = resources.obtainTypedArray(R.array.league_image)
-        items.clear()
-        for (i in name.indices) {
-            items.add(
-                Leaguee(
-                    name[i],
-                    image.getResourceId(i, 0)
-                )
-            )
-        }
-        // Recycle the typed array
-        image.recycle()
-    }
+//    private fun initData() {
+//        val name = resources.getStringArray(R.array.match_name)
+//        val image = resources.obtainTypedArray(R.array.league_image)
+//        items.clear()
+//        for (i in name.indices) {
+//            items.add(
+//                League(
+//                    "",
+//                    image.getResourceId(i, 0).toString(),
+//                    name[i]
+//
+//                )
+//            )
+//        }
+//        // Recycle the typed array
+//        image.recycle()
+//    }
 
-    private fun showRecyclerView() {
-        match_list?.layoutManager = LinearLayoutManager(context)
-        match_list?.adapter = MatchAdapter(items)
-    }
+//    private fun showRecyclerView() {
+//        match_list?.layoutManager = LinearLayoutManager(context)
+//        match_list?.adapter = MatchAdapter(items)
+//    }
 
     companion object {
         private const val ARG_SECTION_NUMBER = "section_number"

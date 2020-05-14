@@ -25,9 +25,9 @@ class LeagueRepositoryTest {
     @Test
     fun shouldThrowExceptionWhenRemoteThrowException(){
         runBlocking {
-            `when`(remoteDataStore?.getDetailLeague()).thenReturn(null)
+            `when`(remoteDataStore?.getDetailLeague(leagueId= "4346")).thenReturn(null)
             try {
-                leagueRepository?.getDetailLeague()
+                leagueRepository?.getDetailLeague(leagueId = "4346")
             } catch (ex: Exception){
 
             }

@@ -5,9 +5,9 @@ import com.smk.futbol.network.ApiService
 
 class LeagueRemoteDataStore(private val apiService: ApiService) :
     LeagueDataStore {
-    override suspend fun getDetailLeague(): MutableList<League>? {
-        val response = apiService.getDetailLeague()
-        if (response.isSuccessful) return response.body()?.leagues
+    override suspend fun getDetailLeague(leagueId: String): MutableList<League>? {
+        val response = apiService.getDetailLeague(leagueId)
+        if (response.isSuccessful) return response.body()?.league
 
         throw Exception("Terjadi kesalahan ${response.code()}")
     }

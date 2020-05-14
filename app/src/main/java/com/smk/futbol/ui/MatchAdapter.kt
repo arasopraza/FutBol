@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.smk.futbol.model.Leaguee
 import com.smk.futbol.MainActivity
 import com.smk.futbol.R
+import com.smk.futbol.model.League
 import kotlinx.android.synthetic.main.item_list_match.view.*
 
-class MatchAdapter(private val leaguee: List<Leaguee>)
+class MatchAdapter(private val league: List<League>)
     : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,10 +20,10 @@ class MatchAdapter(private val leaguee: List<Leaguee>)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = leaguee.size
+    override fun getItemCount(): Int = league.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(leaguee[position])
+        holder.bindItem(league[position])
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -32,20 +32,20 @@ class MatchAdapter(private val leaguee: List<Leaguee>)
         private val imageHome = itemView.image_home
         private val imageAway = itemView.image_home
 
-        fun bindItem(items: Leaguee) {
+        fun bindItem(items: League) {
             with(itemView) {
                 Glide.with(itemView.context)
-                    .load(items.image)
+                    .load(items.leagueBadge)
                     .apply(RequestOptions().override(55, 55))
                     .into(imageHome)
 
                 Glide.with(itemView.context)
-                    .load(items.image)
+                    .load(items.leagueBadge)
                     .apply(RequestOptions().override(55, 55))
                     .into(imageAway)
 
-                nameHome.text = items.name
-                nameAway.text = items.name
+                nameHome.text = items.leagueName
+                nameAway.text = items.leagueName
 
                 //intent to another activity
                 itemView.setOnClickListener {
