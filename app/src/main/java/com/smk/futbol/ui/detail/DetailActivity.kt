@@ -1,4 +1,4 @@
-package com.smk.futbol.ui
+package com.smk.futbol.ui.detail
 
 
 import android.app.SearchManager
@@ -13,8 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.smk.futbol.R
 import com.smk.futbol.model.League
-import com.smk.futbol.ui.detail.LeagueDetailViewModel
-import com.smk.futbol.ui.detail.LeagueDetailViewState
+import com.smk.futbol.repository.LeagueRepository
+import com.smk.futbol.ui.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -33,12 +33,12 @@ class DetailActivity : AppCompatActivity() {
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
 
-//        val factory = LeagueDetailViewModelFactory(LeagueRepository.instance)
-        viewModel = ViewModelProvider(this)[LeagueDetailViewModel::class.java].apply {
+        val factory = LeagueDetailFactory(LeagueRepository.instance)
+        viewModel = ViewModelProvider(this, factory)[LeagueDetailViewModel::class.java].apply {
             viewState.observe(
                 this@DetailActivity,
-                Observer(this@DetailActivity::handleState)
-            )
+                Observer(this@DetailActivity::handleState))
+            getDetailLeague(leagueId = "4346")
         }
 
     }

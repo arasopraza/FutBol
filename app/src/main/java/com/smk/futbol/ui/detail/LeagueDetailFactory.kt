@@ -7,12 +7,12 @@ import com.smk.futbol.repository.LeagueRepository
 
 
 @Suppress("UNCHECKED_CAST")
-class LeagueDetailViewModelFactory(
+class LeagueDetailFactory(
     private val leagueRepository: LeagueRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LeagueDetailViewModel::class.java))
-            return LeagueDetailViewModel() as T
+            return LeagueDetailViewModel(leagueRepository) as T
         throw IllegalArgumentException()
     }
 }

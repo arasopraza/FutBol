@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.smk.futbol.MainActivity.Companion.LEAGUE_DATA
 import com.smk.futbol.R
 import com.smk.futbol.model.Leaguee
+import com.smk.futbol.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.item_list_league.view.*
 
 class LeagueAdapter(private val leaguee: List<Leaguee>)
