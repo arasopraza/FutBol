@@ -38,8 +38,7 @@ class LeagueDetailViewModelTest {
 
     @Test
     fun shouldNotNullAfterSetData() {
-        leagueDetailViewModel?.setData(League("", "", ""))
         val state = leagueDetailViewModel!!.viewState.value!!
-        assertNotNull(state.datadetail)
+        assertNotNull(state.data)
     }
 }

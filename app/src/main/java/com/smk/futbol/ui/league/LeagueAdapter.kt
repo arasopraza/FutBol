@@ -1,4 +1,4 @@
-package com.smk.futbol.ui
+package com.smk.futbol.ui.league
 
 import android.content.Intent
 import android.view.LayoutInflater

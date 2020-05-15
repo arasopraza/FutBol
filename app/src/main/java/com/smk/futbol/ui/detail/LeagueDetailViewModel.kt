@@ -8,20 +8,21 @@ import com.smk.futbol.model.League
 import com.smk.futbol.repository.LeagueRepository
 import kotlinx.coroutines.launch
 
-class LeagueDetailViewModel(private val leagueSets: LeagueRepository) : ViewModel() {
+class LeagueDetailViewModel(private val leagueRepository: LeagueRepository) : ViewModel() {
     private var mViewState = MutableLiveData<LeagueDetailViewState>().apply {
         value = LeagueDetailViewState(true, null, null)
     }
     val viewState: LiveData<LeagueDetailViewState>
         get() = mViewState
 
-    fun setData(league: League) {
-        mViewState.value = viewState.value?.copy(datadetail = league)
+    init {
+        getDetailLeague()
     }
 
-    fun getDetailLeague(leagueId: String) = viewModelScope.launch {
+
+    fun getDetailLeague() = viewModelScope.launch {
         try {
-            val data = leagueSets.getDetailLeague(leagueId)
+            val data = leagueRepository.getDetailLeague()
             mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)
         } catch (ex: Exception) {
             mViewState.value = mViewState.value?.copy(loading = false, error = ex, data = null)

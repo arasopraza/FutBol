@@ -24,7 +24,7 @@ data class League(
 //    val strDivision: String,
 //    val strFacebook: String,
     @SerializedName("strLeague")
-    val leagueName: String
+    val strLeague: String
 //    val strLeagueAlternate: String,
 //    val strLocked: String,
 //    @SerializedName("strLogo")
@@ -36,6 +36,6 @@ data class League(
 //    val strYoutube: String
 ) : Parcelable {
     data class LeagueResponse(
-        val league: MutableList<League>
+        val leagues: MutableList<League>
     )
 }

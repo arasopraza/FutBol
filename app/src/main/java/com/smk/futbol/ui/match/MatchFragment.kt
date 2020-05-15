@@ -1,18 +1,22 @@
-package com.smk.futbol.ui
+package com.smk.futbol.ui.match
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smk.futbol.R
 import com.smk.futbol.model.Event
-import com.smk.futbol.model.League
+import com.smk.futbol.repository.MatchRepository
 import kotlinx.android.synthetic.main.fragment_match.*
+import java.lang.Exception
 
 class MatchFragment : Fragment() {
-    private var items: MutableList<Event> = mutableListOf()
+    private lateinit var viewModel: MatchListViewModel
+    private lateinit var adapter: MatchListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,33 +28,33 @@ class MatchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        match_list?.setHasFixedSize(true)
-//        initData()
-//        showRecyclerView()
+
+
+        adapter = MatchListAdapter()
+        match_list.adapter = adapter
+
+        val factory = MatchListFactory(MatchRepository.instance)
+        viewModel = ViewModelProvider(this, factory)[MatchListViewModel::class.java].apply {
+            viewState.observe(
+                viewLifecycleOwner, Observer(this@MatchFragment::handleState)
+            )
+        }
     }
 
-//    private fun initData() {
-//        val name = resources.getStringArray(R.array.match_name)
-//        val image = resources.obtainTypedArray(R.array.league_image)
-//        items.clear()
-//        for (i in name.indices) {
-//            items.add(
-//                League(
-//                    "",
-//                    image.getResourceId(i, 0).toString(),
-//                    name[i]
-//
-//                )
-//            )
-//        }
-//        // Recycle the typed array
-//        image.recycle()
-//    }
+    private fun handleState(viewState: MatchViewState?) {
+        viewState?.let {
+            it.data?.let { data -> showData(data) }
+            it.error?.let { error -> showError(error) }
+        }
+    }
 
-//    private fun showRecyclerView() {
-//        match_list?.layoutManager = LinearLayoutManager(context)
-//        match_list?.adapter = MatchAdapter(items)
-//    }
+    private fun showData(data: MutableList<Event>) {
+        adapter.setMatch(data)
+    }
+
+    private fun showError(error: Exception){
+
+    }
 
     companion object {
         private const val ARG_SECTION_NUMBER = "section_number"

@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_detail.*
 class DetailActivity : AppCompatActivity() {
     private lateinit var viewModel: LeagueDetailViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -34,11 +33,14 @@ class DetailActivity : AppCompatActivity() {
         tab_layout.setupWithViewPager(view_pager)
 
         val factory = LeagueDetailFactory(LeagueRepository.instance)
-        viewModel = ViewModelProvider(this, factory)[LeagueDetailViewModel::class.java].apply {
+        viewModel = ViewModelProvider(
+            this,
+            factory
+        )[LeagueDetailViewModel::class.java].apply {
             viewState.observe(
                 this@DetailActivity,
-                Observer(this@DetailActivity::handleState))
-            getDetailLeague(leagueId = "4346")
+                Observer(this@DetailActivity::handleState)
+            )
         }
 
     }
@@ -74,11 +76,11 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun handleState(viewState: LeagueDetailViewState?) {
-        viewState?.datadetail?.let { showDetail(it) }
+        viewState?.data?.let { showDetail(it) }
     }
 
-    private fun showDetail(data: League) {
-        name_league.text = data.leagueName
+    private fun showDetail(data: MutableList<League>) {
+        name_league.text = data[0].strLeague
     }
 }
 

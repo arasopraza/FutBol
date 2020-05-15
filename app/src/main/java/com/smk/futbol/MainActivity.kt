@@ -3,13 +3,12 @@ package com.smk.futbol
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.smk.futbol.model.League
-import com.smk.futbol.model.Leaguee
-import com.smk.futbol.ui.LeagueAdapter
+import com.smk.futbol.model.LeagueList
+import com.smk.futbol.ui.league.LeagueAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private var items: MutableList<Leaguee> = mutableListOf()
+    private var items: MutableList<LeagueList> = mutableListOf()
 
     companion object {
         const val LEAGUE_DATA = "league_data"
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         items.clear()
         for (i in name.indices) {
             items.add(
-                Leaguee(
+                LeagueList(
                     id[i],
                     name[i],
                     image.getResourceId(i, 0)
