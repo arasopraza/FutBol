@@ -1,4 +1,4 @@
-package com.smk.futbol.ui
+package com.smk.futbol.ui.match
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -10,13 +10,15 @@ import com.bumptech.glide.request.RequestOptions
 import com.smk.futbol.MainActivity
 import com.smk.futbol.R
 import com.smk.futbol.model.League
+import com.smk.futbol.ui.DetailMatchActivity
 import kotlinx.android.synthetic.main.item_list_match.view.*
 
-class MatchAdapter(private val league: List<League>)
-    : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
+class MatchAdapter : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
+    private val matchlist = mutableListOf<>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list_match, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_match, parent, false)
         return ViewHolder(view)
     }
 
