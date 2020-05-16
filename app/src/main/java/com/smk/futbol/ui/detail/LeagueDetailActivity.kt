@@ -80,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showDetail(data: MutableList<League>) {
-        name_league.text = data[0].strLeague
+        name_league.text = data[0].leagueName
     }
 }
 

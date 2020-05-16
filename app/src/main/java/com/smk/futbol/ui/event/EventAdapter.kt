@@ -1,18 +1,11 @@
 package com.smk.futbol.ui.match
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.smk.futbol.MainActivity
 import com.smk.futbol.R
 import com.smk.futbol.model.Event
-import com.smk.futbol.model.League
-import com.smk.futbol.ui.DetailMatchActivity
 import kotlinx.android.synthetic.main.item_list_match.view.*
 
 class MatchListAdapter : RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {

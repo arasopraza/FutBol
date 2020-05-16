@@ -5,12 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.smk.futbol.R
 import com.smk.futbol.model.Event
-import com.smk.futbol.repository.MatchRepository
+import com.smk.futbol.repository.EventRepository
 import kotlinx.android.synthetic.main.fragment_match.*
 import java.lang.Exception
 
@@ -33,12 +30,12 @@ class MatchFragment : Fragment() {
         adapter = MatchListAdapter()
         match_list.adapter = adapter
 
-        val factory = MatchListFactory(MatchRepository.instance)
-        viewModel = ViewModelProvider(this, factory)[MatchListViewModel::class.java].apply {
-            viewState.observe(
-                viewLifecycleOwner, Observer(this@MatchFragment::handleState)
-            )
-        }
+        val factory = MatchListFactory(EventRepository.instance)
+//        viewModel = ViewModelProvider(this, factory)[MatchListViewModel::class.java].apply {
+//            viewState.observe(
+//                viewLifecycleOwner, Observer(this@MatchFragment::handleState)
+//            )
+//        }
     }
 
     private fun handleState(viewState: MatchViewState?) {
