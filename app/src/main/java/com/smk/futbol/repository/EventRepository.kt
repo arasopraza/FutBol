@@ -1,16 +1,15 @@
 package com.smk.futbol.repository
 
-import com.smk.futbol.datastore.match.MatchDataStore
+import com.smk.futbol.datastore.event.EventRemoteDataStore
 import com.smk.futbol.model.Event
 
-class MatchRepository private constructor() : BaseRepository<MatchDataStore>() {
+class EventRepository private constructor() : BaseRepository<EventRemoteDataStore>() {
 
-    suspend fun getPrevMatch(leagueId: String): MutableList<Event>? {
-        val response = remoteDataStore?.getPrevMatch(leagueId)
-        return response
+    suspend fun getPrevMatch(idLeague: String): MutableList<Event>? {
+        return remoteDataStore?.getPrevMatch(idLeague)
     }
 
     companion object {
-        val instance by lazy { MatchRepository() }
+        val instance by lazy { EventRepository() }
     }
 }

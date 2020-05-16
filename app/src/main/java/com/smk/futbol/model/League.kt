@@ -10,7 +10,7 @@ data class League(
 //    val idAPIfootball: String,
 //    val idCup: String,
     @SerializedName("idLeague")
-    val leagueId: String?,
+    val idLeague: String?,
 //    val idSoccerXML: String,
 //    val intFormedYear: String,
     @SerializedName("strBadge")
@@ -19,12 +19,12 @@ data class League(
 //    val strComplete: String,
 //    val strCountry: String,
 //    val strCurrentSeason: String,
-//    @SerializedName("strDescriptionEN")
-//    val leagueDesc: String,
+    @SerializedName("strDescriptionEN")
+    val leagueDesc: String,
 //    val strDivision: String,
 //    val strFacebook: String,
     @SerializedName("strLeague")
-    val strLeague: String
+    val leagueName: String
 //    val strLeagueAlternate: String,
 //    val strLocked: String,
 //    @SerializedName("strLogo")

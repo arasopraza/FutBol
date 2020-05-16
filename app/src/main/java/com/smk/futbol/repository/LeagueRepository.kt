@@ -1,14 +1,12 @@
 package com.smk.futbol.repository
 
-import com.smk.futbol.datastore.league.LeagueDataStore
+import com.smk.futbol.datastore.league.LeagueRemoteDataStore
 import com.smk.futbol.model.League
 
-class LeagueRepository private constructor() : BaseRepository<LeagueDataStore>() {
+class LeagueRepository private constructor() : BaseRepository<LeagueRemoteDataStore>() {
 
-    suspend fun getDetailLeague(): MutableList<League>? {
-        val response = remoteDataStore?.getDetailLeague()
-        response?.let { leagueDataStore?.addAll(it)}
-        return response
+    suspend fun getDetailLeague(idLeague: String): MutableList<League>? {
+        return remoteDataStore?.getDetailLeague(idLeague)
     }
 
     companion object {

@@ -11,13 +11,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.smk.futbol.MainActivity.Companion.LEAGUE_ID
 import com.smk.futbol.R
 import com.smk.futbol.model.League
 import com.smk.futbol.repository.LeagueRepository
 import com.smk.futbol.ui.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 
-class DetailActivity : AppCompatActivity() {
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+class LeagueDetailActivity : AppCompatActivity() {
     private lateinit var viewModel: LeagueDetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,15 +35,17 @@ class DetailActivity : AppCompatActivity() {
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
 
-        val factory = LeagueDetailFactory(LeagueRepository.instance)
         viewModel = ViewModelProvider(
-            this,
-            factory
+            this, LeagueDetailFactory(this, Bundle(), LeagueRepository.instance)
         )[LeagueDetailViewModel::class.java].apply {
-            viewState.observe(
-                this@DetailActivity,
-                Observer(this@DetailActivity::handleState)
+            leagueObservable.observe(
+                this@LeagueDetailActivity,
+                Observer(this@LeagueDetailActivity::handleState)
             )
+            if (leagueObservable.value?.data == null) {
+                val id = intent.getStringExtra(LEAGUE_ID)
+                getDetailLeague(id)
+            }
         }
 
     }
@@ -56,7 +61,7 @@ class DetailActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Toast.makeText(this@DetailActivity, query, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LeagueDetailActivity, query, Toast.LENGTH_SHORT).show()
                 return true
             }
 
@@ -79,10 +84,16 @@ class DetailActivity : AppCompatActivity() {
         viewState?.data?.let { showDetail(it) }
     }
 
-    private fun showDetail(data: MutableList<League>) {
-        name_league.text = data[0].leagueName
+    private fun showDetail(leagues: MutableList<League>) {
+        name_league.text = leagues[0].leagueName
+        desc_league.text = leagues[0].leagueDesc
+        Glide.with(this)
+            .load(leagues[0].leagueBadge)
+            .into(image_league)
+
     }
 }
+
 
 
 

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.smk.futbol.R
-import com.smk.futbol.ui.match.MatchFragment
+import com.smk.futbol.ui.event.EventFragment
 
 class ViewPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -16,7 +16,7 @@ class ViewPagerAdapter(private val context: Context, fm: FragmentManager) :
     )
     
     override fun getItem(position: Int): Fragment {
-    return MatchFragment.newInstance(position + 1)
+    return EventFragment.newInstance(position + 1)
 }
 
     override fun getCount(): Int {

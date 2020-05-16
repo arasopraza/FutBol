@@ -9,22 +9,23 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("eventspastleague.php")
+    @GET("eventspastleague.php?id")
     suspend fun getPrevMatch(
-        @Query("id") leagueId: String
-    ): Response<Event.EventResponse>
-
-    @GET("eventsnextleague.php")
-    suspend fun getNextMatch(
         @Query("id") idLeague: String
-    ): Response<Event.EventResponse>
+    ): Event.EventResponse
 
-    @GET("1/lookupleague.php?id=4346")
+//    @GET("eventsnextleague.php")
+//    suspend fun getNextMatch(
+//        @Query("id") idLeague: String
+//    ): Response<Event.EventResponse>
+
+    @GET("lookupleague.php?id")
     suspend fun getDetailLeague(
+        @Query("id") idLeague: String
     ): League.LeagueResponse
 
-    @GET("lookupevent.php")
-    fun getEventById(
-        @Path("id") id: String
-    ): Response<Event>
+//    @GET("lookupevent.php?{id}")
+//    fun getEventById(
+//        @Path("id") id: String
+//    ): Response<Event>
 }

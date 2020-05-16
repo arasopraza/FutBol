@@ -1,16 +1,18 @@
-package com.smk.futbol.datastore.match
+package com.smk.futbol.datastore.event
 
 import com.smk.futbol.model.Event
 import com.smk.futbol.network.ApiService
 
-class MatchRemoteDataStore(private var apiService: ApiService) : MatchDataStore {
-    override suspend fun getPrevMatch(leagueId: String): MutableList<Event>? {
-        val response = apiService.getPrevMatch(leagueId)
-        if (response.isSuccessful) return response.body()?.events
+@Suppress("UNREACHABLE_CODE")
+class EventRemoteDataStore(private val apiService: ApiService) {
+    @Throws(Exception::class)
+    suspend fun getPrevMatch(idLeague: String): MutableList<Event> {
+        val response = apiService.getPrevMatch(idLeague)
+        return response.events
 
-        throw Exception("Something went wrong ${response.code()}")
+        throw Exception("Something went wrong $response")
     }
 
-    override suspend fun addAll(events: MutableList<Event>?) {
+    suspend fun addAll(events: MutableList<Event>?) {
     }
 }

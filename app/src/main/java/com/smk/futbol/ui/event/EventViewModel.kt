@@ -1,4 +1,4 @@
-package com.smk.futbol.ui.match
+package com.smk.futbol.ui.event
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,20 +8,20 @@ import com.smk.futbol.repository.EventRepository
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class MatchListViewModel(private val eventRepository: EventRepository) : ViewModel() {
-    private val mViewState = MutableLiveData<MatchViewState>().apply {
-        value = MatchViewState(loading = true)
+class EventViewModel(private val eventRepository: EventRepository) : ViewModel() {
+    private var mViewState = MutableLiveData<EventViewState>().apply {
+        value = EventViewState(true)
     }
-    val viewState: LiveData<MatchViewState>
-    get() = mViewState
+    val eventObservable: LiveData<EventViewState>
+        get() = mViewState
 
-    init {
-        getPrevMatch("")
-    }
+//    init {
+//        getPrevMatch("")
+//    }
 
-    fun getPrevMatch(leagueId: String) = viewModelScope.launch {
+    fun getPrevMatch(idLeague: String) = viewModelScope.launch {
         try {
-            val data = eventRepository.getPrevMatch(leagueId)
+            val data = eventRepository.getPrevMatch(idLeague)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)
         } catch (ex: Exception) {
             mViewState.value = mViewState.value?.copy(loading = false, error = ex, data = null)

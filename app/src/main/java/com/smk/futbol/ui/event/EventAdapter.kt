@@ -1,4 +1,4 @@
-package com.smk.futbol.ui.match
+package com.smk.futbol.ui.event
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import com.smk.futbol.R
 import com.smk.futbol.model.Event
 import kotlinx.android.synthetic.main.item_list_match.view.*
 
-class MatchListAdapter : RecyclerView.Adapter<MatchListAdapter.ViewHolder>() {
+class EventAdapter : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
     private val matchList = mutableListOf<Event>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

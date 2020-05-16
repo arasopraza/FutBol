@@ -1,19 +1,21 @@
-package com.smk.futbol.ui.match
+package com.smk.futbol.ui.event
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.smk.futbol.R
 import com.smk.futbol.model.Event
 import com.smk.futbol.repository.EventRepository
 import kotlinx.android.synthetic.main.fragment_match.*
-import java.lang.Exception
 
-class MatchFragment : Fragment() {
-    private lateinit var viewModel: MatchListViewModel
-    private lateinit var adapter: MatchListAdapter
+
+class EventFragment : Fragment() {
+    private lateinit var viewModel: EventViewModel
+    private lateinit var adapter: EventAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,18 +29,22 @@ class MatchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        adapter = MatchListAdapter()
+        adapter = EventAdapter()
         match_list.adapter = adapter
-
-        val factory = MatchListFactory(EventRepository.instance)
-//        viewModel = ViewModelProvider(this, factory)[MatchListViewModel::class.java].apply {
-//            viewState.observe(
-//                viewLifecycleOwner, Observer(this@MatchFragment::handleState)
-//            )
-//        }
+        viewModel = ViewModelProvider(
+            this, EventFactory(this, Bundle(), EventRepository.instance)
+        )[EventViewModel::class.java].apply {
+            eventObservable.observe(
+                viewLifecycleOwner,
+                Observer(this@EventFragment::handleState)
+            )
+            if (eventObservable.value?.data == null) {
+                getPrevMatch("")
+            }
+        }
     }
 
-    private fun handleState(viewState: MatchViewState?) {
+    private fun handleState(viewState: EventViewState?) {
         viewState?.let {
             it.data?.let { data -> showData(data) }
             it.error?.let { error -> showError(error) }
@@ -49,14 +55,14 @@ class MatchFragment : Fragment() {
         adapter.setMatch(data)
     }
 
-    private fun showError(error: Exception){
+    private fun showError(error: Exception) {
 
     }
 
     companion object {
         private const val ARG_SECTION_NUMBER = "section_number"
-        fun newInstance(index: Int): MatchFragment {
-            val fragment = MatchFragment()
+        fun newInstance(index: Int): EventFragment {
+            val fragment = EventFragment()
             val bundle = Bundle()
             bundle.putInt(ARG_SECTION_NUMBER, index)
             fragment.arguments = bundle

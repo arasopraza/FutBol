@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class LeagueList(
-    val id: String?,
-    val name: String?,
-    val image: Int?
+    var id: String?,
+    var name: String? = "",
+    var image: Int? = 0
 ) :Parcelable

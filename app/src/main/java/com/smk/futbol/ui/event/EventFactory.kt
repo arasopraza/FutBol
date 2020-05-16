@@ -1,15 +1,26 @@
-package com.smk.futbol.ui.match
+package com.smk.futbol.ui.event
 
+import android.os.Bundle
+import androidx.lifecycle.AbstractSavedStateViewModelFactory
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.savedstate.SavedStateRegistryOwner
 import com.smk.futbol.repository.EventRepository
 import java.lang.IllegalArgumentException
 
-class MatchListFactory(private val eventRepository: EventRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MatchListViewModel::class.java))
-            return MatchListViewModel(eventRepository) as T
-        throw IllegalArgumentException()
-    }
+@Suppress("UNCHECKED_CAST")
+class EventFactory(
+    savedStateRegistryOwner: SavedStateRegistryOwner, defaultArgs: Bundle,
+    private val eventRepository: EventRepository
+) : AbstractSavedStateViewModelFactory(savedStateRegistryOwner, defaultArgs) {
 
+    override fun <T : ViewModel?> create(
+        key: String,
+        modelClass: Class<T>,
+        handle: SavedStateHandle
+    ): T {
+        return EventViewModel(eventRepository) as T
+
+    }
 }

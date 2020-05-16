@@ -7,24 +7,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.smk.futbol.MainActivity.Companion.LEAGUE_DATA
+import com.smk.futbol.MainActivity.Companion.LEAGUE_ID
 import com.smk.futbol.R
 import com.smk.futbol.model.LeagueList
-import com.smk.futbol.ui.detail.DetailActivity
+import com.smk.futbol.ui.detail.LeagueDetailActivity
 import kotlinx.android.synthetic.main.item_list_league.view.*
 
-class LeagueAdapter(private val leaguee: List<LeagueList>)
-    : RecyclerView.Adapter<LeagueAdapter.ViewHolder>() {
+class LeagueAdapter(private val listLeague: ArrayList<LeagueList>) :
+    RecyclerView.Adapter<LeagueAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
-       val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list_league, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_league, parent, false)
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = leaguee.size
+    override fun getItemCount(): Int = listLeague.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(leaguee[position])
+        holder.bindItem(listLeague[position])
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,20 +34,21 @@ class LeagueAdapter(private val leaguee: List<LeagueList>)
 
         fun bindItem(items: LeagueList) {
             with(itemView) {
-            Glide.with(itemView.context)
-                .load(items.image)
-                .apply(RequestOptions().override(55, 55))
-                .into(image)
+                Glide.with(itemView.context)
+                    .load(items.image)
+                    .into(image)
 
-            name.text = items.name
+                name.text = items.name
 
-            //intent to another activity
-            itemView.setOnClickListener {
-                val intent = Intent(context, DetailActivity::class.java).apply {
-                    putExtra(LEAGUE_DATA, items)
+
+                //intent to another activity
+                itemView.setOnClickListener {
+                    val intent = Intent(context, LeagueDetailActivity::class.java).apply {
+                        putExtra(LEAGUE_ID, items.id)
+                    }
+                    context.startActivity(intent)
+
                 }
-                context.startActivity(intent)
-            }
             }
         }
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailActivity">
+    tools:context=".ui.detail.LeagueDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -13,6 +13,17 @@
         android:fitsSystemWindows="true"
         android:translationZ="2dp"
         tools:ignore="MissingConstraints" />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="@id/cardView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        style="?android:progressBarStyle"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -34,9 +45,16 @@
 
         <TextView
             android:id="@+id/name_league"
-            android:layout_width="112dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="180dp"
+            android:layout_marginStart="145dp" />
+
+        <TextView
+            android:id="@+id/desc_league"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="240dp"
             android:layout_marginStart="145dp" />
 
     </androidx.cardview.widget.CardView>
@@ -51,10 +69,10 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="329dp"
+        android:layout_height="374dp"
         android:background="?android:windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
