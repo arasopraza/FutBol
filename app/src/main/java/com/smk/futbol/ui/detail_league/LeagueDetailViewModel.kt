@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smk.futbol.repository.LeagueRepository
+import com.smk.futbol.repository.league.LeagueRepository
 import kotlinx.coroutines.launch
 
-class LeagueDetailViewModel(private val leagueRepository: LeagueRepository) : ViewModel() {
+class LeagueDetailViewModel(private val repository: LeagueRepository) : ViewModel() {
     private var mViewState = MutableLiveData<LeagueDetailViewState>().apply {
         value = LeagueDetailViewState(true)
     }
@@ -21,7 +21,7 @@ class LeagueDetailViewModel(private val leagueRepository: LeagueRepository) : Vi
 
      fun getDetailLeague(idLeague: String) = viewModelScope.launch {
         try {
-            val data = leagueRepository.getDetailLeague(idLeague)
+            val data = repository.getDetailLeague(idLeague)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)
         } catch (ex: Exception) {
             mViewState.value = mViewState.value?.copy(loading = false, error = ex, data = null)

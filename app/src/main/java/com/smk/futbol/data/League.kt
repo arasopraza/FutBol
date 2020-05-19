@@ -1,16 +1,16 @@
-package com.smk.futbol.model
+package com.smk.futbol.data
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class League(
+data class LeagueEntity(
 //    val dateFirstEvent: String,
 //    val idAPIfootball: String,
 //    val idCup: String,
     @SerializedName("idLeague")
-    val idLeague: String?,
+    val idLeague: String,
 //    val idSoccerXML: String,
 //    val intFormedYear: String,
     @SerializedName("strBadge")
@@ -36,6 +36,6 @@ data class League(
 //    val strYoutube: String
 ) : Parcelable {
     data class LeagueResponse(
-        val leagues: MutableList<League>
+        val leagues: MutableList<LeagueEntity>
     )
 }

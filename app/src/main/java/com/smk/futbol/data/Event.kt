@@ -1,17 +1,17 @@
-package com.smk.futbol.model
+package com.smk.futbol.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Event(
+data class EventEntity(
     val dateEvent: String,
 //    val dateEventLocal: Any,
 //    val idAPIfootball: Any,
     val idAwayTeam: String,
     val idEvent: String,
     val idHomeTeam: String,
-    val idLeague: String,
+    val idLeague: String?,
     val idSoccerXML: String,
 //    val intAwayScore: Any,
 //    val intAwayShots: Any,
@@ -67,6 +67,6 @@ data class Event(
 //    val strVideo: Any
 ) : Parcelable {
     data class EventResponse(
-        val events: MutableList<Event>
+        val events: MutableList<EventEntity>
     )
 }
