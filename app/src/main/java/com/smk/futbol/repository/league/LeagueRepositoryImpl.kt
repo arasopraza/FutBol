@@ -1,12 +1,12 @@
-package com.smk.futbol.datastore.league
+package com.smk.futbol.repository.league
 
-import com.smk.futbol.data.LeagueEntity
+import com.smk.futbol.data.League
 import com.smk.futbol.network.ApiService
 
 @Suppress("UNREACHABLE_CODE")
-class LeagueRemoteDataStore(private val apiService: ApiService){
+class LeagueRepositoryImpl(private val apiService: ApiService){
     @Throws(Exception::class)
-    suspend fun getDetailLeague(idLeague: String): MutableList<LeagueEntity> {
+    suspend fun getDetailLeague(idLeague: String): MutableList<League> {
         val response = apiService.getDetailLeague(idLeague)
         return response.leagues
 

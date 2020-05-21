@@ -5,37 +5,27 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class LeagueEntity(
+data class League(
 //    val dateFirstEvent: String,
 //    val idAPIfootball: String,
 //    val idCup: String,
-    @SerializedName("idLeague")
-    val idLeague: String,
+    @SerializedName("idLeague") val idLeague: String,
 //    val idSoccerXML: String,
 //    val intFormedYear: String,
-    @SerializedName("strBadge")
-    val leagueBadge: String,
+    @SerializedName("strBadge") val leagueBadge: String,
 //    val strBanner: String,
 //    val strComplete: String,
-//    val strCountry: String,
+    @SerializedName("strCountry") val strCountry: String,
 //    val strCurrentSeason: String,
-    @SerializedName("strDescriptionEN")
-    val leagueDesc: String,
+    @SerializedName("strDescriptionEN") val leagueDesc: String,
 //    val strDivision: String,
 //    val strFacebook: String,
-    @SerializedName("strLeague")
-    val leagueName: String
+    @SerializedName("strLeague") val leagueName: String
 //    val strLeagueAlternate: String,
 //    val strLocked: String,
-//    @SerializedName("strLogo")
-//    val leagueLogo: String
 //    val strPoster: String,
 //    val strSport: String,
 //    val strTwitter: String,
 //    val strWebsite: String,
 //    val strYoutube: String
-) : Parcelable {
-    data class LeagueResponse(
-        val leagues: MutableList<LeagueEntity>
-    )
-}
+) : Parcelable

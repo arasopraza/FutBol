@@ -1,17 +1,16 @@
-package com.smk.futbol.ui.detail_league
+package com.smk.futbol.ui.event.previous
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.smk.futbol.repository.league.LeagueRepository
-
+import com.smk.futbol.repository.event.EventRepository
 
 @Suppress("UNCHECKED_CAST")
-class LeagueDetailFactory(
+class EventFactory(
     savedStateRegistryOwner: SavedStateRegistryOwner, defaultArgs: Bundle,
-    private val leagueRepository: LeagueRepository
+    private val eventRepository: EventRepository
 ) : AbstractSavedStateViewModelFactory(savedStateRegistryOwner, defaultArgs) {
 
     override fun <T : ViewModel?> create(
@@ -19,6 +18,7 @@ class LeagueDetailFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return LeagueDetailViewModel(leagueRepository) as T
+        return EventViewModel(eventRepository) as T
+
     }
 }

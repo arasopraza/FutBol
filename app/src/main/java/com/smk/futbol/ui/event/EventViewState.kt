@@ -1,6 +1,6 @@
 package com.smk.futbol.ui.event
 
-import com.smk.futbol.model.Event
+import com.smk.futbol.data.Event
 
 data class EventViewState(
     var loading: Boolean = false,

@@ -1,16 +1,14 @@
-package com.smk.futbol.ui.event
+package com.smk.futbol.ui.search
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.savedstate.SavedStateRegistryOwner
-import com.smk.futbol.repository.EventRepository
-import java.lang.IllegalArgumentException
+import com.smk.futbol.repository.event.EventRepository
 
 @Suppress("UNCHECKED_CAST")
-class EventFactory(
+class SearchFactory(
     savedStateRegistryOwner: SavedStateRegistryOwner, defaultArgs: Bundle,
     private val eventRepository: EventRepository
 ) : AbstractSavedStateViewModelFactory(savedStateRegistryOwner, defaultArgs) {
@@ -20,7 +18,7 @@ class EventFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return EventViewModel(eventRepository) as T
+        return SearchViewModel(eventRepository) as T
 
     }
 }

@@ -1,4 +1,4 @@
-package com.smk.futbol.ui.detail
+package com.smk.futbol.ui.detail_league
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,12 +14,7 @@ class LeagueDetailViewModel(private val repository: LeagueRepository) : ViewMode
     val leagueObservable: LiveData<LeagueDetailViewState>
         get() = mViewState
 
-//    init {
-//        getDetailLeague("")
-//    }
-
-
-     fun getDetailLeague(idLeague: String) = viewModelScope.launch {
+    fun getDetailLeague(idLeague: String) = viewModelScope.launch {
         try {
             val data = repository.getDetailLeague(idLeague)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)

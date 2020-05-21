@@ -1,9 +1,11 @@
 package com.smk.futbol
 
 import android.app.Application
-import com.smk.futbol.datastore.league.LeagueRemoteDataStore
+import com.smk.futbol.repository.event.EventRepositoryImpl
+import com.smk.futbol.repository.league.LeagueRepositoryImpl
 import com.smk.futbol.network.ApiClient
-import com.smk.futbol.repository.LeagueRepository
+import com.smk.futbol.repository.event.EventRepository
+import com.smk.futbol.repository.league.LeagueRepository
 
 class BaseApplication : Application() {
     override fun onCreate() {
@@ -13,13 +15,13 @@ class BaseApplication : Application() {
 
         LeagueRepository.instance.apply {
             init(
-                LeagueRemoteDataStore(apiService)
+                LeagueRepositoryImpl(apiService)
             )
         }
-//        MatchRepository.instance.apply {
-//            init(
-//                MatchRemoteDataStore(apiService)
-//            )
-//        }
+        EventRepository.instance.apply {
+            init(
+                EventRepositoryImpl(apiService)
+            )
+        }
     }
 }

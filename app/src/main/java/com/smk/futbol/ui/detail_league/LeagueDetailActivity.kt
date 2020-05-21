@@ -1,4 +1,4 @@
-package com.smk.futbol.ui.detail
+package com.smk.futbol.ui.detail_league
 
 
 import android.app.SearchManager
@@ -7,25 +7,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.smk.futbol.MainActivity.Companion.LEAGUE_ID
 import com.smk.futbol.R
-import com.smk.futbol.data.LeagueEntity
+import com.smk.futbol.data.League
 import com.smk.futbol.repository.league.LeagueRepository
-import com.smk.futbol.ui.ViewPagerAdapter
-import com.smk.futbol.ui.event.EventViewModel
 import com.smk.futbol.ui.search.SearchActivity
+import com.smk.futbol.ui.search.SearchActivity.Companion.QUERY_MATCH
+import com.smk.futbol.utils.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+@Suppress(
+    "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
+    "RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS"
+)
 class LeagueDetailActivity : AppCompatActivity() {
-    private lateinit var detailViewModel: LeagueDetailViewModel
-    private lateinit var searchViewModel: EventViewModel
+    private lateinit var viewModel: LeagueDetailViewModel
+    private lateinit var viewModelFactory: ViewModelProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,44 +38,35 @@ class LeagueDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val viewPagerAdapter =
-            ViewPagerAdapter(this, supportFragmentManager)
+            ViewPagerAdapter(
+                this,
+                supportFragmentManager
+            )
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
 
-        detailViewModel = ViewModelProvider(
-            this, LeagueDetailFactory(this, Bundle(), LeagueRepository.instance)
-        )[LeagueDetailViewModel::class.java].apply {
-            leagueObservable.observe(
-                this@LeagueDetailActivity,
-                Observer(this@LeagueDetailActivity::handleState)
-            )
-            if (leagueObservable.value?.data == null) {
-                val league = intent.getStringExtra(LEAGUE_ID)
-                getDetailLeague(league)
-            }
-        }
-
+        initObservable()
+        showLoading(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.option_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.option_menu, menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu?.findItem(R.id.search)?.actionView as SearchView
+        val searchView = menu.findItem(R.id.search)?.actionView as SearchView
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 val intent = Intent(this@LeagueDetailActivity, SearchActivity::class.java).apply {
-                    putExtra("SEARCH_MATCH", query)
+                    putExtra(QUERY_MATCH, query)
                 }
                 startActivity(intent)
                 return true
             }
 
-            override fun onQueryTextChange(query: String?): Boolean {
+            override fun onQueryTextChange(query: String): Boolean {
                 return false
             }
         })
@@ -87,29 +81,41 @@ class LeagueDetailActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun initObservable() {
+        val idLeague = intent.getStringExtra(LEAGUE_ID)
+        viewModelFactory = ViewModelProvider(
+            this, LeagueDetailFactory
+                (this, Bundle(), LeagueRepository.instance)
+        )
+        viewModel = viewModelFactory[LeagueDetailViewModel::class.java].apply {
+            leagueObservable.observe(
+                this@LeagueDetailActivity,
+                Observer(this@LeagueDetailActivity::handleState)
+            )
+            getDetailLeague(idLeague)
+            showLoading(false)
+        }
+    }
+
     private fun handleState(viewState: LeagueDetailViewState?) {
         viewState?.data?.let { showDetail(it) }
     }
 
-//    private fun handleStateSearch(viewState: EventViewState?) {
-//        viewState?.data?.let { showEvent(it) }
-//    }
-
-
-    private fun showDetail(leagues: MutableList<LeagueEntity>) {
+    private fun showDetail(leagues: MutableList<League>) {
         name_league.text = leagues[0].leagueName
+        country_league.text = leagues[0].strCountry
         desc_league.text = leagues[0].leagueDesc
         Glide.with(this)
             .load(leagues[0].leagueBadge)
             .into(image_league)
-
     }
 
-    //    private fun showEvent(events: MutableList<Event>) {
-//        name_league.text = events[0].strHomeTeam
-//        name_league.text = events[0].strAwayTeam
-//        name_league.text = events[0].strDate
-//    }
+    fun showLoading(state: Boolean) {
+        if (state) {
+            progressbar.visibility = View.VISIBLE
+        } else
+            progressbar.visibility = View.GONE
+    }
 }
 
 

@@ -1,103 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_gravity="center"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginEnd="6dp"
+    app:cardCornerRadius="@dimen/activity_horizontal_margin">
 
-    <ImageView
-        android:id="@+id/image_home"
-        android:layout_width="64dp"
-        android:layout_height="73dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:contentDescription="@string/team_home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/english_premier_league" />
-
-    <ImageView
-        android:id="@+id/image_away"
-        android:layout_width="64dp"
-        android:layout_height="73dp"
-        android:contentDescription="@string/team_away"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/english_premier_league" />
-
-    <TextView
-        android:id="@+id/name_home"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/team_home"
-        app:layout_constraintStart_toStartOf="@+id/image_home"
-        app:layout_constraintTop_toBottomOf="@+id/image_home" />
+        android:padding="2dp">
 
-    <TextView
-        android:id="@+id/name_away"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/team_away"
-        app:layout_constraintStart_toStartOf="@+id/image_away"
-        app:layout_constraintTop_toBottomOf="@+id/image_away" />
+        <TextView
+            android:id="@+id/name_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/team_home"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/score_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/score_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/score_home"
-        app:layout_constraintEnd_toStartOf="@+id/line"
-        app:layout_constraintStart_toEndOf="@+id/image_home"
-        app:layout_constraintTop_toBottomOf="@+id/date_match" />
+        <TextView
+            android:id="@+id/name_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/team_away"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/score_away"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/score_away"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="92dp"
-        android:text="@string/score_away"
-        app:layout_constraintEnd_toStartOf="@+id/image_away"
-        app:layout_constraintStart_toEndOf="@+id/line"
-        app:layout_constraintTop_toBottomOf="@+id/date_match" />
+        <TextView
+            android:id="@+id/score_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/score_home"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
-    <TextView
-        android:id="@+id/full_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/fulltime"
-        app:layout_constraintEnd_toStartOf="@+id/score_away"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toEndOf="@+id/score_home"
-        app:layout_constraintTop_toBottomOf="@+id/line" />
+        <TextView
+            android:id="@+id/score_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/score_away"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
-    <TextView
-        android:id="@+id/line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/line"
-        app:layout_constraintEnd_toStartOf="@+id/score_away"
-        app:layout_constraintStart_toEndOf="@+id/score_home"
-        app:layout_constraintTop_toBottomOf="@+id/date_match" />
+        <TextView
+            android:id="@+id/full_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/fulltime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vs" />
 
-    <TextView
-        android:id="@+id/date_match"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/date_match"
-        app:layout_constraintEnd_toStartOf="@+id/image_away"
-        app:layout_constraintStart_toEndOf="@+id/image_home"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/vs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/vs"
+            app:layout_constraintEnd_toStartOf="@+id/score_away"
+            app:layout_constraintStart_toEndOf="@+id/score_home"
+            app:layout_constraintTop_toBottomOf="@+id/date_event" />
+
+        <TextView
+            android:id="@+id/date_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/date_event"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

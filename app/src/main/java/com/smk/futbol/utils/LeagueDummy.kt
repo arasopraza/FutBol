@@ -1,7 +1,7 @@
 package com.smk.futbol.utils
 
 import com.smk.futbol.R
-import com.smk.futbol.model.LeagueList
+import com.smk.futbol.data.LeagueList
 
 object LeagueDummy {
 

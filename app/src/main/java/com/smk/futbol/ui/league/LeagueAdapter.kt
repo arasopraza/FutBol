@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.smk.futbol.MainActivity.Companion.LEAGUE_ID
 import com.smk.futbol.R
-import com.smk.futbol.model.LeagueList
-import com.smk.futbol.ui.detail.LeagueDetailActivity
+import com.smk.futbol.data.LeagueList
+import com.smk.futbol.ui.detail_league.LeagueDetailActivity
 import kotlinx.android.synthetic.main.item_list_league.view.*
 
 class LeagueAdapter(private val listLeague: ArrayList<LeagueList>) :
@@ -43,11 +42,10 @@ class LeagueAdapter(private val listLeague: ArrayList<LeagueList>) :
 
                 //intent to another activity
                 itemView.setOnClickListener {
-                    val intent = Intent(context, LeagueDetailActivity::class.java).apply {
+                    val idLeague = Intent(context, LeagueDetailActivity::class.java).apply {
                         putExtra(LEAGUE_ID, items.id)
                     }
-                    context.startActivity(intent)
-
+                    context.startActivity(idLeague)
                 }
             }
         }
