@@ -17,7 +17,7 @@ class NextEventViewModel(private val repository: EventRepository) : ViewModel() 
     val eventObservable: LiveData<EventViewState>
     get() = mViewState
 
-    fun getNextMatch(idLeague: String) = viewModelScope.launch {
+    fun setNextMatch(idLeague: String) = viewModelScope.launch {
         try {
             val data = repository.getNextMatch(idLeague)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)

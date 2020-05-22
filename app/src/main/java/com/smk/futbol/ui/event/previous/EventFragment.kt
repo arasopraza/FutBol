@@ -1,5 +1,6 @@
 package com.smk.futbol.ui.event.previous
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.smk.futbol.R
 import com.smk.futbol.data.Event
 import com.smk.futbol.repository.event.EventRepository
+import com.smk.futbol.ui.detail_league.LeagueDetailActivity
 import com.smk.futbol.ui.event.EventAdapter
 import com.smk.futbol.ui.event.EventViewState
 import kotlinx.android.synthetic.main.fragment_match.*
@@ -20,6 +22,7 @@ class EventFragment : Fragment() {
     private lateinit var viewModel: EventViewModel
     private lateinit var viewModelFactory: ViewModelProvider
     private lateinit var adapter: EventAdapter
+    private lateinit var activity: LeagueDetailActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +40,11 @@ class EventFragment : Fragment() {
 
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = context as LeagueDetailActivity
+    }
+
     private fun initObservable() {
         viewModelFactory = ViewModelProvider(
             this,
@@ -51,7 +59,7 @@ class EventFragment : Fragment() {
                 viewLifecycleOwner,
                 Observer(this@EventFragment::handleState)
             )
-                getPrevMatch("4346")
+            setPrevMatch(activity.idLeague)
         }
     }
 
@@ -63,6 +71,7 @@ class EventFragment : Fragment() {
 
     private fun showRecyclerView(data: MutableList<Event>) {
         adapter.setEvent(data)
+        adapter.notifyDataSetChanged()
     }
 }
 

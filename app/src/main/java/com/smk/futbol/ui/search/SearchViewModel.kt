@@ -17,7 +17,7 @@ private var mViewState = MutableLiveData<EventViewState>().apply {
 val searchObservable: LiveData<EventViewState>
     get() = mViewState
 
-fun getSearchMatch(query: String) = viewModelScope.launch {
+fun setSearchMatch(query: String) = viewModelScope.launch {
     try {
         val data = repository.getSearchMatch(query)
         mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)

@@ -49,7 +49,9 @@ class SearchActivity : AppCompatActivity() {
                     this@SearchActivity::handleState
                 )
             )
-            getSearchMatch(query)
+            if (searchObservable.value?.data == null) {
+                setSearchMatch(query)
+            }
         }
     }
 

@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 class LeagueDetailActivity : AppCompatActivity() {
     private lateinit var viewModel: LeagueDetailViewModel
     private lateinit var viewModelFactory: ViewModelProvider
+    var idLeague = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,9 @@ class LeagueDetailActivity : AppCompatActivity() {
             )
         view_pager.adapter = viewPagerAdapter
         tab_layout.setupWithViewPager(view_pager)
+
+        val getIdLeague = intent.getStringExtra(LEAGUE_ID)
+        idLeague = getIdLeague
 
         initObservable()
         showLoading(true)
@@ -92,7 +96,7 @@ class LeagueDetailActivity : AppCompatActivity() {
                 this@LeagueDetailActivity,
                 Observer(this@LeagueDetailActivity::handleState)
             )
-            getDetailLeague(idLeague)
+            setDetailLeague(idLeague)
             showLoading(false)
         }
     }
@@ -110,7 +114,7 @@ class LeagueDetailActivity : AppCompatActivity() {
             .into(image_league)
     }
 
-    fun showLoading(state: Boolean) {
+    private fun showLoading(state: Boolean) {
         if (state) {
             progressbar.visibility = View.VISIBLE
         } else

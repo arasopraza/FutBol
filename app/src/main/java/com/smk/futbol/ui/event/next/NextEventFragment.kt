@@ -57,7 +57,7 @@ class NextEventFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                getNextMatch("4346")
+                setNextMatch("4346")
             }
         }
     }

@@ -14,7 +14,7 @@ class LeagueDetailViewModel(private val repository: LeagueRepository) : ViewMode
     val leagueObservable: LiveData<LeagueDetailViewState>
         get() = mViewState
 
-    fun getDetailLeague(idLeague: String) = viewModelScope.launch {
+    fun setDetailLeague(idLeague: String) = viewModelScope.launch {
         try {
             val data = repository.getDetailLeague(idLeague)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)
