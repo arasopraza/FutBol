@@ -1,6 +1,6 @@
 package com.smk.futbol.ui.detail_league
 
-import com.smk.futbol.data.League
+import com.smk.futbol.data.source.League
 
 data class LeagueDetailViewState(
     val loading: Boolean = false,

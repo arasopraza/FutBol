@@ -1,13 +1,13 @@
-package com.smk.futbol
+package com.smk.futbol.base
 
 import android.app.Application
-import com.smk.futbol.data.repository.league.LeagueRepositoryImpl
+import com.smk.futbol.data.source.remote.LeagueRemoteDataSource
 import com.smk.futbol.network.WebClient
-import com.smk.futbol.data.repository.event.EventRepository
-import com.smk.futbol.data.repository.event.EventRepositoryImpl
-import com.smk.futbol.data.repository.league.LeagueRepository
-import com.smk.futbol.data.repository.event_detail.EventDetailRepository
-import com.smk.futbol.data.repository.event_detail.EventDetailRepositoryImpl
+import com.smk.futbol.data.EventRepository
+import com.smk.futbol.data.source.remote.EventRemoteDataSource
+import com.smk.futbol.data.LeagueRepository
+import com.smk.futbol.data.EventDetailRepository
+import com.smk.futbol.data.source.remote.EventDetailRemoteDataSource
 
 class BaseApplication : Application() {
     override fun onCreate() {
@@ -17,17 +17,23 @@ class BaseApplication : Application() {
 
         LeagueRepository.instance.apply {
             init(
-                LeagueRepositoryImpl(webService)
+                LeagueRemoteDataSource(
+                    webService
+                )
             )
         }
         EventRepository.instance.apply {
             init(
-                EventRepositoryImpl(webService)
+                EventRemoteDataSource(
+                    webService
+                )
             )
         }
         EventDetailRepository.instance.apply{
             init(
-               EventDetailRepositoryImpl(webService)
+                EventDetailRemoteDataSource(
+                    webService
+                )
             )
         }
     }

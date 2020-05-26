@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.smk.futbol.MainActivity.Companion.LEAGUE_ID
+import com.smk.futbol.ui.home.MainActivity.Companion.LEAGUE_ID
 import com.smk.futbol.R
-import com.smk.futbol.data.LeagueList
+import com.smk.futbol.data.source.LeagueList
 import com.smk.futbol.ui.detail_league.LeagueDetailActivity
 import kotlinx.android.synthetic.main.item_list_league.view.*
 

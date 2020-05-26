@@ -1,6 +1,8 @@
-package com.smk.futbol.data.source
+package com.smk.futbol.data.source.remote.response
+
+import com.smk.futbol.data.source.Event
 
 
-data class Match(
+data class MatchResponse(
     val event: MutableList<Event>
 )

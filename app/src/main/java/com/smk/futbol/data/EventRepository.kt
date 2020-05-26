@@ -1,9 +1,11 @@
-package com.smk.futbol.data.repository.event
+package com.smk.futbol.data
 
+import com.smk.futbol.base.BaseRepository
 import com.smk.futbol.data.source.Event
-import com.smk.futbol.data.repository.BaseRepository
+import com.smk.futbol.data.source.Team
+import com.smk.futbol.data.source.remote.EventRemoteDataSource
 
-class EventRepository private constructor() : BaseRepository<EventRepositoryImpl>() {
+class EventRepository private constructor() : BaseRepository<EventRemoteDataSource>() {
 
     suspend fun getPrevMatch(idLeague: String): MutableList<Event>? {
         return remoteDataStore?.getPrevMatch(idLeague)
@@ -19,6 +21,10 @@ class EventRepository private constructor() : BaseRepository<EventRepositoryImpl
 
     suspend fun getDetailEvent(idEvent: String): MutableList<Event>? {
         return remoteDataStore?.getDetailEvent(idEvent)
+    }
+
+    suspend fun getBadgeTeam(idTeam: String): MutableList<Team>? {
+        return remoteDataStore?.getBadgeTeam(idTeam)
     }
 
     companion object {

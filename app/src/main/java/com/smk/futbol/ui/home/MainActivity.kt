@@ -1,8 +1,9 @@
-package com.smk.futbol
+package com.smk.futbol.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.smk.futbol.data.league.LeagueList
+import com.smk.futbol.R
+import com.smk.futbol.data.source.LeagueList
 import com.smk.futbol.ui.league.LeagueAdapter
 import com.smk.futbol.utils.LeagueDummy
 import kotlinx.android.synthetic.main.activity_main.*

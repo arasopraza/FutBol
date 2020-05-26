@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smk.futbol.repository.league.LeagueRepository
+import com.smk.futbol.data.LeagueRepository
 import kotlinx.coroutines.launch
 
 class LeagueDetailViewModel(private val repository: LeagueRepository) : ViewModel() {

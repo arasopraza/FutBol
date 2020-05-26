@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.smk.futbol.R
-import com.smk.futbol.data.Event
+import com.smk.futbol.data.source.Event
 import com.smk.futbol.ui.detail_event.EventDetailActivity
 import com.smk.futbol.ui.detail_event.EventDetailActivity.Companion.EVENT_DETAIL
 import kotlinx.android.synthetic.main.item_list_event.view.*

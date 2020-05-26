@@ -1,4 +1,4 @@
-package com.smk.futbol.data.league
+package com.smk.futbol.data.source
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

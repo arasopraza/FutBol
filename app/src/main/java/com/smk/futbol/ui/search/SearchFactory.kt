@@ -5,7 +5,7 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.smk.futbol.repository.event.EventRepository
+import com.smk.futbol.data.EventRepository
 
 @Suppress("UNCHECKED_CAST")
 class SearchFactory(

@@ -1,17 +1,18 @@
 package com.smk.futbol.ui.event.next
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-
 import com.smk.futbol.R
-import com.smk.futbol.data.Event
-import com.smk.futbol.repository.event.EventRepository
+import com.smk.futbol.data.source.Event
+import com.smk.futbol.data.EventRepository
+import com.smk.futbol.ui.detail_league.LeagueDetailActivity
 import com.smk.futbol.ui.event.EventAdapter
 import com.smk.futbol.ui.event.EventViewState
 import kotlinx.android.synthetic.main.next_event_fragment.*
@@ -21,6 +22,7 @@ class NextEventFragment : Fragment() {
     private lateinit var viewModel: NextEventViewModel
     private lateinit var viewModelFactory: ViewModelProvider
     private lateinit var adapter: EventAdapter
+    private lateinit var activity: LeagueDetailActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +39,11 @@ class NextEventFragment : Fragment() {
         initObservable()
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        activity = context as LeagueDetailActivity
+    }
+
     private fun initObservable() {
         viewModelFactory = ViewModelProvider(
             this,
@@ -50,15 +57,7 @@ class NextEventFragment : Fragment() {
             eventObservable.observe(
                 viewLifecycleOwner, Observer(this@NextEventFragment::handleState)
             )
-            if (eventObservable.value?.data == null) {
-                Toast.makeText(
-                    context,
-                    "Next Match Not Available During Pandemic",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                setNextMatch("4346")
-            }
+            setNextMatch(activity.idLeague)
         }
     }
 
@@ -69,6 +68,11 @@ class NextEventFragment : Fragment() {
     }
 
     private fun showRecyclerView(data: MutableList<Event>) {
-        adapter.setEvent(data)
+        if (data.size == 0) {
+            Toast.makeText(context, "Match not found", Toast.LENGTH_SHORT).show()
+        } else {
+            adapter.setEvent(data)
+            adapter.notifyDataSetChanged()
+        }
     }
 }

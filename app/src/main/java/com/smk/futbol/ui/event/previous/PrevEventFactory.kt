@@ -5,10 +5,10 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.smk.futbol.repository.event.EventRepository
+import com.smk.futbol.data.EventRepository
 
 @Suppress("UNCHECKED_CAST")
-class EventFactory(
+class PrevEventFactory(
     savedStateRegistryOwner: SavedStateRegistryOwner, defaultArgs: Bundle,
     private val eventRepository: EventRepository
 ) : AbstractSavedStateViewModelFactory(savedStateRegistryOwner, defaultArgs) {
@@ -18,7 +18,7 @@ class EventFactory(
         modelClass: Class<T>,
         handle: SavedStateHandle
     ): T {
-        return EventViewModel(eventRepository) as T
+        return PrevEventViewModel(eventRepository) as T
 
     }
 }

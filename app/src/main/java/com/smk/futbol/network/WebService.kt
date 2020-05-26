@@ -1,36 +1,42 @@
 package com.smk.futbol.network
 
-import com.smk.futbol.data.EventResponse
-import com.smk.futbol.data.League
-import com.smk.futbol.data.LeagueResponse
-import com.smk.futbol.data.Match
+import com.smk.futbol.data.source.remote.response.EventResponse
+import com.smk.futbol.data.source.remote.response.MatchResponse
+import com.smk.futbol.data.source.remote.response.LeagueResponse
+import com.smk.futbol.data.source.remote.response.TeamResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface ApiService {
+interface WebService {
 
     @GET("eventspastleague.php?id")
     suspend fun getPrevMatch(
         @Query("id") idLeague: String
-    ): EventResponse
+    ): Response <EventResponse>
 
     @GET("eventsnextleague.php?id")
     suspend fun getNextMatch(
         @Query("id") idLeague: String
-    ): EventResponse
+    ): Response <EventResponse>
 
     @GET("lookupleague.php?id")
     suspend fun getDetailLeague(
         @Query("id") idLeague: String
-    ): LeagueResponse
+    ): Response <LeagueResponse>
 
     @GET("lookupevent.php?id")
-    fun getEventById(
+    suspend fun getDetailEvent(
         @Query("id") idEvent: String
-    ): EventResponse
+    ): Response <EventResponse>
+
+    @GET("lookupteam.php?id")
+    suspend fun getDetailTeam(
+        @Query("id") idTeam: String
+    ): Response <TeamResponse>
 
     @GET("searchevents.php?e")
     suspend fun getSearchEvent(
         @Query("e") Query: String
-    ): Match
+    ): Response <MatchResponse>
 }

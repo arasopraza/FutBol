@@ -5,21 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.smk.futbol.R
-import com.smk.futbol.data.Event
-import com.smk.futbol.repository.event.EventRepository
+import com.smk.futbol.data.source.Event
+import com.smk.futbol.data.EventRepository
 import com.smk.futbol.ui.detail_league.LeagueDetailActivity
 import com.smk.futbol.ui.event.EventAdapter
 import com.smk.futbol.ui.event.EventViewState
-import kotlinx.android.synthetic.main.fragment_match.*
+import kotlinx.android.synthetic.main.prev_event_fragment.*
 
 
-class EventFragment : Fragment() {
+class PrevEventFragment : Fragment() {
+    var idTeamHome = ""
 
-    private lateinit var viewModel: EventViewModel
+    private lateinit var viewModel: PrevEventViewModel
     private lateinit var viewModelFactory: ViewModelProvider
     private lateinit var adapter: EventAdapter
     private lateinit var activity: LeagueDetailActivity
@@ -29,7 +31,7 @@ class EventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_match, container, false)
+        return inflater.inflate(R.layout.prev_event_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,16 +50,16 @@ class EventFragment : Fragment() {
     private fun initObservable() {
         viewModelFactory = ViewModelProvider(
             this,
-            EventFactory(
+            PrevEventFactory(
                 this,
                 Bundle(),
                 EventRepository.instance
             )
         )
-        viewModel = viewModelFactory[EventViewModel::class.java].apply {
+        viewModel = viewModelFactory[PrevEventViewModel::class.java].apply {
             eventObservable.observe(
                 viewLifecycleOwner,
-                Observer(this@EventFragment::handleState)
+                Observer(this@PrevEventFragment::handleState)
             )
             setPrevMatch(activity.idLeague)
         }
@@ -72,6 +74,9 @@ class EventFragment : Fragment() {
     private fun showRecyclerView(data: MutableList<Event>) {
         adapter.setEvent(data)
         adapter.notifyDataSetChanged()
+        if (data.size == 0) {
+            Toast.makeText(context, "Match not found", Toast.LENGTH_SHORT).show()
+        }
     }
 }
 

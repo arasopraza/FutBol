@@ -1,4 +1,4 @@
-package com.smk.futbol.utils
+package com.smk.futbol.ui.home
 
 import android.content.Context
 import androidx.fragment.app.Fragment

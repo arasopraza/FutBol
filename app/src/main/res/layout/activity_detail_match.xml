@@ -6,26 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail_event.EventDetailActivity">
 
-
     <TextView
-        android:id="@+id/name_league"
+        android:id="@+id/name_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/name_league"
+        android:text="@string/name_event"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name_season"
+        android:id="@+id/name_league"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="@string/name_season"
+        android:text="@string/name_league"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_league" />
+        app:layout_constraintTop_toBottomOf="@id/name_event" />
 
     <TextView
         android:id="@+id/date_event"
@@ -35,55 +36,81 @@
         android:text="@string/date_event"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_season" />
+        app:layout_constraintTop_toBottomOf="@+id/name_league" />
+
+    <ImageView
+        android:id="@+id/image_home"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="170dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="16dp"
         android:text="@string/team_home"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_home" />
+
+    <ImageView
+        android:id="@+id/image_away"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name_away"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/team_away"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/image_away" />
 
     <TextView
         android:id="@+id/score_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="80dp"
         android:text="@string/score_home"
-        app:layout_constraintStart_toEndOf="@+id/name_home"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/image_home"
+        app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
     <TextView
         android:id="@+id/score_away"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="60dp"
         android:text="@string/score_away"
-        app:layout_constraintEnd_toStartOf="@+id/name_away"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/image_away"
+        app:layout_constraintTop_toBottomOf="@id/date_event" />
 
     <TextView
         android:id="@+id/vs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="86dp"
+        android:text="@string/vs"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_event" />
 

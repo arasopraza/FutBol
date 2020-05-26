@@ -1,14 +1,13 @@
-package com.smk.futbol.data.repository.league
+package com.smk.futbol.data.source.remote
 
 import com.smk.futbol.data.source.League
 import com.smk.futbol.network.WebService
 
-@Suppress("UNREACHABLE_CODE")
-class LeagueRepositoryImpl(private val webService: WebService){
+class LeagueRemoteDataSource(private val webService: WebService){
 
-    suspend fun getDetailLeague(idLeague: String): MutableList<League> {
+    suspend fun getDetailLeague(idLeague: String): MutableList<League>? {
         val response = webService.getDetailLeague(idLeague)
-        return response.leagues
+        if (response.isSuccessful) return response.body()?.leagues
 
         throw Exception("Something went wrong $response")
     }

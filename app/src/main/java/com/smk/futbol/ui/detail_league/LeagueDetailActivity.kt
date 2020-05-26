@@ -8,18 +8,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.smk.futbol.MainActivity.Companion.LEAGUE_ID
+import com.smk.futbol.ui.home.MainActivity.Companion.LEAGUE_ID
 import com.smk.futbol.R
-import com.smk.futbol.data.League
-import com.smk.futbol.repository.league.LeagueRepository
+import com.smk.futbol.data.source.League
+import com.smk.futbol.data.LeagueRepository
 import com.smk.futbol.ui.search.SearchActivity
 import com.smk.futbol.ui.search.SearchActivity.Companion.QUERY_MATCH
-import com.smk.futbol.utils.ViewPagerAdapter
+import com.smk.futbol.ui.home.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 
 @Suppress(
@@ -50,7 +51,7 @@ class LeagueDetailActivity : AppCompatActivity() {
         idLeague = getIdLeague
 
         initObservable()
-        showLoading(true)
+//        showLoading(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -97,7 +98,7 @@ class LeagueDetailActivity : AppCompatActivity() {
                 Observer(this@LeagueDetailActivity::handleState)
             )
             setDetailLeague(idLeague)
-            showLoading(false)
+//            showLoading(true)
         }
     }
 
@@ -107,19 +108,19 @@ class LeagueDetailActivity : AppCompatActivity() {
 
     private fun showDetail(leagues: MutableList<League>) {
         name_league.text = leagues[0].leagueName
-        country_league.text = leagues[0].strCountry
+        country_league.text = leagues[0].leagueCountry
         desc_league.text = leagues[0].leagueDesc
         Glide.with(this)
             .load(leagues[0].leagueBadge)
             .into(image_league)
     }
 
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            progressbar.visibility = View.VISIBLE
-        } else
-            progressbar.visibility = View.GONE
-    }
+//    private fun showLoading(state: Boolean) {
+//        if (state) {
+//            progressbar.visibility = View.VISIBLE
+//        } else
+//            progressbar.visibility = View.GONE
+//    }
 }
 
 
