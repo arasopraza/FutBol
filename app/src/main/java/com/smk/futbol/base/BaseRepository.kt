@@ -1,4 +1,4 @@
-package com.smk.futbol.repository
+package com.smk.futbol.data.repository
 
 
 

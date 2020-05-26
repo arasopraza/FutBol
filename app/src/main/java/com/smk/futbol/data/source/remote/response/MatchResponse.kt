@@ -1,4 +1,4 @@
-package com.smk.futbol.data
+package com.smk.futbol.data.source
 
 
 data class Match(

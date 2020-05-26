@@ -1,7 +1,7 @@
-package com.smk.futbol.repository.league
+package com.smk.futbol.data.repository.league
 
-import com.smk.futbol.data.League
-import com.smk.futbol.repository.BaseRepository
+import com.smk.futbol.data.source.League
+import com.smk.futbol.data.repository.BaseRepository
 
 class LeagueRepository private constructor() : BaseRepository<LeagueRepositoryImpl>() {
 
