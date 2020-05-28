@@ -8,9 +8,7 @@ import kotlinx.android.parcel.Parcelize
 data class League(
 //    val dateFirstEvent: String,
 //    val idAPIfootball: String,
-//    val idCup: String,
     @SerializedName("idLeague") val idLeague: String,
-//    val idSoccerXML: String,
     @SerializedName("intFormedYear") val leagueFormedYear: String,
     @SerializedName("strBadge") val leagueBadge: String,
 //    val strBanner: String,

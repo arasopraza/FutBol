@@ -24,12 +24,22 @@ class EventDetailViewModel(private val repository: EventRepository) : ViewModel(
         }
     }
 
-    fun setTeamBadge(idTeam: String) = viewModelScope.launch {
+    fun setTeamHomeBadge(idTeam: String) = viewModelScope.launch {
         try {
             val team = repository.getBadgeTeam(idTeam)
-            mViewState.value = mViewState.value?.copy(loading = false, error = null, team = team)
+            mViewState.value = mViewState.value?.copy(loading = false, error = null, teamHome = team)
         } catch (ex: Exception) {
-            mViewState.value = mViewState.value?.copy(loading = false, error = ex, team = null)
+            mViewState.value = mViewState.value?.copy(loading = false, error = ex, teamHome = null)
+        }
+
+    }
+
+    fun setTeamAwayBadge(idTeam: String) = viewModelScope.launch {
+        try {
+            val team = repository.getBadgeTeam(idTeam)
+            mViewState.value = mViewState.value?.copy(loading = false, error = null, teamAway = team)
+        } catch (ex: Exception) {
+            mViewState.value = mViewState.value?.copy(loading = false, error = ex, teamAway = null)
         }
     }
 }

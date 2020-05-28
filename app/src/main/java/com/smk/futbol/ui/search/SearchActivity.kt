@@ -1,6 +1,8 @@
 package com.smk.futbol.ui.search
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +13,7 @@ import com.smk.futbol.data.source.Event
 import com.smk.futbol.data.EventRepository
 import com.smk.futbol.ui.event.EventAdapter
 import com.smk.futbol.ui.event.EventViewState
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -31,12 +34,19 @@ class SearchActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Search Match"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         adapter = EventAdapter()
         event_search.adapter = adapter
         initObservable()
-//        showLoading(true)
+        showLoading(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            this.finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initObservable() {
@@ -60,7 +70,10 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun handleState(viewState: EventViewState?) {
-        viewState?.let {
+        if (!viewState?.loading!!) {
+            showLoading(false)
+        }
+        viewState.let {
             it.data?.let { data -> showRecyclerView(data) }
         }
 
@@ -74,10 +87,11 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-//    private fun showLoading(state: Boolean) {
-//        if (state) {
-//            progressBar.visibility = View.VISIBLE
-//        } else
-//            progressBar.visibility = View.GONE
-//    }
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            pb_search.visibility = View.VISIBLE
+        } else
+            pb_search.visibility = View.GONE
+    }
+
 }

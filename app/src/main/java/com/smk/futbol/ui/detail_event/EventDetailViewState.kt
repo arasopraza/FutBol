@@ -7,5 +7,6 @@ data class EventDetailViewState(
     val loading: Boolean = false,
     val error: Exception? = null,
     val data: MutableList<Event>? = null,
-    val team: MutableList<Team>? = null
+    val teamHome: MutableList<Team>? = null,
+    val teamAway: MutableList<Team>? = null
 )

@@ -1,6 +1,8 @@
 package com.smk.futbol.ui.detail_event
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -8,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.smk.futbol.R
 import com.smk.futbol.data.EventRepository
 import com.smk.futbol.data.source.Event
+import com.smk.futbol.data.source.Team
 import kotlinx.android.synthetic.main.activity_detail_match.*
 
 @Suppress(
@@ -25,10 +28,22 @@ class EventDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_match)
+
         supportActionBar?.title = "Detail Match"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         initObservable()
+        initLogoTeamHome()
+        initLogoTeamAway()
+        showLoading(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            this.finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initObservable() {
@@ -46,8 +61,36 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun initLogoTeamHome() {
+        val id = intent.getParcelableExtra<Event>(EVENT_DETAIL)
+        viewModel = viewModelFactory[EventDetailViewModel::class.java].apply {
+            eventObservable.observe(
+                this@EventDetailActivity,
+                Observer(this@EventDetailActivity::handleState)
+            )
+            viewModel.setTeamHomeBadge(id.idHomeTeam)
+        }
+    }
+
+    private fun initLogoTeamAway() {
+        val id = intent.getParcelableExtra<Event>(EVENT_DETAIL)
+        viewModel = viewModelFactory[EventDetailViewModel::class.java].apply {
+            eventObservable.observe(
+                this@EventDetailActivity,
+                Observer(this@EventDetailActivity::handleState)
+            )
+            viewModel.setTeamAwayBadge(id.idAwayTeam)
+        }
+    }
+
+
     private fun handleState(viewState: EventDetailViewState?) {
-        viewState?.data?.let { showDetail(it) }
+        if (!viewState?.loading!!) {
+            showLoading(false)
+        }
+        viewState.data?.let { showDetail(it) }
+        viewState.teamHome?.let { showTeamBadgeHome(it) }
+        viewState.teamAway?.let { showTeamBadgeAway(it) }
     }
 
     private fun showDetail(events: MutableList<Event>) {
@@ -58,18 +101,25 @@ class EventDetailActivity : AppCompatActivity() {
         name_away.text = events[0].strAwayTeam
         score_home.text = events[0].intHomeScore
         score_away.text = events[0].intAwayScore
+    }
+
+    private fun showTeamBadgeHome(teams: MutableList<Team>) {
         Glide.with(this)
-            .load(viewModel.setTeamBadge(events[0].idHomeTeam))
+            .load(teams[0].strTeamBadge)
             .into(image_home)
+    }
+
+    private fun showTeamBadgeAway(teams: MutableList<Team>) {
         Glide.with(this)
-            .load(viewModel.setTeamBadge(events[0].idAwayTeam))
+            .load(teams[0].strTeamBadge)
             .into(image_away)
     }
 
-//    private fun showHomeBadge(team: MutableList<Team>) {
-//        Glide.with(this)
-//            .load(team[0].strTeamBadge)
-//            .into(image_home)
-//    }
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            loading_detail_event.visibility = View.VISIBLE
+        } else
+            loading_detail_event.visibility = View.GONE
+    }
 }
 
