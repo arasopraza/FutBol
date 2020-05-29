@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.prev_event_fragment.*
 
 
 class PrevEventFragment : Fragment() {
-    var idTeamHome = ""
 
     private lateinit var viewModel: PrevEventViewModel
     private lateinit var viewModelFactory: ViewModelProvider

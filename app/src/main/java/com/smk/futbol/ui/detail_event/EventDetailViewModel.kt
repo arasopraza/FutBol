@@ -15,7 +15,7 @@ class EventDetailViewModel(private val repository: EventRepository) : ViewModel(
     val eventObservable: LiveData<EventDetailViewState>
         get() = mViewState
 
-    fun setDetailEvent(idEvent: String) = viewModelScope.launch {
+    fun setEventDetail(idEvent: String) = viewModelScope.launch {
         try {
             val data = repository.getDetailEvent(idEvent)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, data = data)
@@ -24,9 +24,9 @@ class EventDetailViewModel(private val repository: EventRepository) : ViewModel(
         }
     }
 
-    fun setTeamHomeBadge(idTeam: String) = viewModelScope.launch {
+    fun setHomeTeamDetail(idTeam: String) = viewModelScope.launch {
         try {
-            val team = repository.getBadgeTeam(idTeam)
+            val team = repository.getTeamDetail(idTeam)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, teamHome = team)
         } catch (ex: Exception) {
             mViewState.value = mViewState.value?.copy(loading = false, error = ex, teamHome = null)
@@ -34,9 +34,9 @@ class EventDetailViewModel(private val repository: EventRepository) : ViewModel(
 
     }
 
-    fun setTeamAwayBadge(idTeam: String) = viewModelScope.launch {
+    fun setAwayTeamDetail(idTeam: String) = viewModelScope.launch {
         try {
-            val team = repository.getBadgeTeam(idTeam)
+            val team = repository.getTeamDetail(idTeam)
             mViewState.value = mViewState.value?.copy(loading = false, error = null, teamAway = team)
         } catch (ex: Exception) {
             mViewState.value = mViewState.value?.copy(loading = false, error = ex, teamAway = null)

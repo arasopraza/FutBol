@@ -33,10 +33,10 @@ class EventAdapter : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameHome = itemView.name_home
-        private val nameAway = itemView.name_away
-        private val scoreHome = itemView.score_home
-        private val scoreAway = itemView.score_away
+        private val nameHome = itemView.home_name
+        private val nameAway = itemView.away_name
+        private val scoreHome = itemView.home_score
+        private val scoreAway = itemView.away_score
         private val dateEvent = itemView.date_event
 
         fun bindItem(items: Event) {

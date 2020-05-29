@@ -20,7 +20,7 @@
         android:padding="2dp">
 
         <TextView
-            android:id="@+id/name_home"
+            android:id="@+id/home_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -29,12 +29,12 @@
             android:text="@string/team_home"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/score_home"
+            app:layout_constraintEnd_toStartOf="@+id/home_score"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/name_away"
+            android:id="@+id/away_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -44,11 +44,11 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/score_away"
+            app:layout_constraintStart_toEndOf="@+id/away_score"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/score_home"
+            android:id="@+id/home_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -60,7 +60,7 @@
             app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
         <TextView
-            android:id="@+id/score_away"
+            android:id="@+id/away_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -90,8 +90,8 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
             android:text="@string/vs"
-            app:layout_constraintEnd_toStartOf="@+id/score_away"
-            app:layout_constraintStart_toEndOf="@+id/score_home"
+            app:layout_constraintEnd_toStartOf="@+id/away_score"
+            app:layout_constraintStart_toEndOf="@+id/home_score"
             app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
         <TextView

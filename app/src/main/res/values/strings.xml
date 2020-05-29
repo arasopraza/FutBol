@@ -12,4 +12,15 @@
     <string name="name_league">Name League</string>
     <string name="name_event">Event</string>
     <string name="vs">vs</string>
+    <string name="yellow_cards">Yellow Cards</string>
+    <string name="red_cards">Red Cards</string>
+    <string name="total_shots">Total Shots</string>
+    <string name="home_shots">Home Shots</string>
+    <string name="away_shots">Away Shots</string>
+    <string name="home_yellow_cards">Home Yellow Cards</string>
+    <string name="home_red_cards">Home Red Cards</string>
+    <string name="away_yellow_cards">Away Yellow Cards</string>
+    <string name="away_red_cards">Away Red Cards</string>
+    <string name="home_manager">Home Manager</string>
+    <string name="away_manager">Away Manager</string>
 </resources>

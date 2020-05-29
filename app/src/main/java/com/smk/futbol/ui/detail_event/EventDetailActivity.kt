@@ -1,5 +1,6 @@
 package com.smk.futbol.ui.detail_event
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +13,7 @@ import com.smk.futbol.data.EventRepository
 import com.smk.futbol.data.source.Event
 import com.smk.futbol.data.source.Team
 import kotlinx.android.synthetic.main.activity_detail_match.*
+import java.text.SimpleDateFormat
 
 @Suppress(
     "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
@@ -33,8 +35,8 @@ class EventDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initObservable()
-        initLogoTeamHome()
-        initLogoTeamAway()
+        initHomeTeam()
+        initAwayTeam()
         showLoading(true)
     }
 
@@ -57,29 +59,29 @@ class EventDetailActivity : AppCompatActivity() {
                 this@EventDetailActivity,
                 Observer(this@EventDetailActivity::handleState)
             )
-            setDetailEvent(id.idEvent)
+            setEventDetail(id.idEvent)
         }
     }
 
-    private fun initLogoTeamHome() {
+    private fun initHomeTeam() {
         val id = intent.getParcelableExtra<Event>(EVENT_DETAIL)
         viewModel = viewModelFactory[EventDetailViewModel::class.java].apply {
             eventObservable.observe(
                 this@EventDetailActivity,
                 Observer(this@EventDetailActivity::handleState)
             )
-            viewModel.setTeamHomeBadge(id.idHomeTeam)
+            viewModel.setHomeTeamDetail(id.idHomeTeam)
         }
     }
 
-    private fun initLogoTeamAway() {
+    private fun initAwayTeam() {
         val id = intent.getParcelableExtra<Event>(EVENT_DETAIL)
         viewModel = viewModelFactory[EventDetailViewModel::class.java].apply {
             eventObservable.observe(
                 this@EventDetailActivity,
                 Observer(this@EventDetailActivity::handleState)
             )
-            viewModel.setTeamAwayBadge(id.idAwayTeam)
+            viewModel.setAwayTeamDetail(id.idAwayTeam)
         }
     }
 
@@ -88,31 +90,44 @@ class EventDetailActivity : AppCompatActivity() {
         if (!viewState?.loading!!) {
             showLoading(false)
         }
-        viewState.data?.let { showDetail(it) }
-        viewState.teamHome?.let { showTeamBadgeHome(it) }
-        viewState.teamAway?.let { showTeamBadgeAway(it) }
+        viewState.data?.let { showEventDetail(it) }
+        viewState.teamHome?.let { showHomeTeamDetail(it) }
+        viewState.teamAway?.let { showAwayTeamDetail(it) }
     }
 
-    private fun showDetail(events: MutableList<Event>) {
+    @SuppressLint("SimpleDateFormat")
+    private fun showEventDetail(events: MutableList<Event>) {
         name_league.text = events[0].strLeague
         name_event.text = events[0].strEvent
-        date_event.text = events[0].dateEvent
-        name_home.text = events[0].strHomeTeam
-        name_away.text = events[0].strAwayTeam
-        score_home.text = events[0].intHomeScore
-        score_away.text = events[0].intAwayScore
+        home_name.text = events[0].strHomeTeam
+        home_score.text = events[0].intHomeScore
+        home_shots.text = events[0].intHomeShots
+        home_yellow_cards.text = events[0].strHomeYellowCards
+        home_red_cards.text = events[0].strHomeRedCards
+        away_name.text = events[0].strAwayTeam
+        away_score.text = events[0].intAwayScore
+        away_shots.text = events[0].intAwayShots
+        away_yellow_cards.text = events[0].strAwayYellowCards
+        away_red_cards.text = events[0].strAwayRedCards
+
+        val parser = SimpleDateFormat("yyyy-mm-dd")
+        val formatter = SimpleDateFormat("EEE, dd, mm, yyyy")
+        val date: String = formatter.format(parser.parse(events[0].dateEvent))
+        date_event.text = date
     }
 
-    private fun showTeamBadgeHome(teams: MutableList<Team>) {
+    private fun showHomeTeamDetail(teams: MutableList<Team>) {
+        home_manager.text = teams[0].strManager
         Glide.with(this)
             .load(teams[0].strTeamBadge)
-            .into(image_home)
+            .into(home_image)
     }
 
-    private fun showTeamBadgeAway(teams: MutableList<Team>) {
+    private fun showAwayTeamDetail(teams: MutableList<Team>) {
+        away_manager.text = teams[0].strManager
         Glide.with(this)
             .load(teams[0].strTeamBadge)
-            .into(image_away)
+            .into(away_image)
     }
 
     private fun showLoading(state: Boolean) {

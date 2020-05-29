@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name_league" />
 
     <ImageView
-        android:id="@+id/image_home"
+        android:id="@+id/home_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
@@ -61,18 +61,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name_home"
+        android:id="@+id/home_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/team_home"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/home_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_home" />
+        app:layout_constraintTop_toBottomOf="@id/home_image" />
 
     <ImageView
-        android:id="@+id/image_away"
+        android:id="@+id/away_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="170dp"
@@ -83,7 +84,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name_away"
+        android:id="@+id/away_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -91,28 +92,29 @@
         android:text="@string/team_away"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_away" />
+        app:layout_constraintStart_toStartOf="@+id/away_image"
+        app:layout_constraintTop_toBottomOf="@id/away_image" />
 
     <TextView
-        android:id="@+id/score_home"
+        android:id="@+id/home_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="80dp"
         android:text="@string/score_home"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/image_home"
+        app:layout_constraintStart_toEndOf="@+id/home_image"
         app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
     <TextView
-        android:id="@+id/score_away"
+        android:id="@+id/away_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="60dp"
         android:text="@string/score_away"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/image_away"
+        app:layout_constraintEnd_toStartOf="@+id/away_image"
         app:layout_constraintTop_toBottomOf="@id/date_event" />
 
     <TextView
@@ -121,8 +123,114 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="86dp"
         android:text="@string/vs"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/date_event"
+        app:layout_constraintStart_toStartOf="@+id/date_event"
         app:layout_constraintTop_toBottomOf="@+id/date_event" />
+
+    <TextView
+        android:id="@+id/separator_shots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="204dp"
+        android:text="@string/total_shots"
+        app:layout_constraintEnd_toStartOf="@+id/vs"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toEndOf="@+id/vs"
+        app:layout_constraintTop_toBottomOf="@+id/vs" />
+
+    <TextView
+        android:id="@+id/separator_yellow_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/yellow_cards"
+        app:layout_constraintEnd_toEndOf="@+id/separator_shots"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintStart_toStartOf="@+id/separator_shots"
+        app:layout_constraintTop_toBottomOf="@+id/separator_shots" />
+
+    <TextView
+        android:id="@+id/separator_red_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/red_cards"
+        app:layout_constraintEnd_toEndOf="@+id/separator_yellow_cards"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/separator_yellow_cards"
+        app:layout_constraintTop_toBottomOf="@+id/separator_yellow_cards" />
+
+    <TextView
+        android:id="@+id/home_shots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/home_shots"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_manager" />
+
+    <TextView
+        android:id="@+id/away_shots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="28dp"
+        android:text="@string/away_shots"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/away_manager" />
+
+    <TextView
+        android:id="@+id/home_yellow_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/home_yellow_cards"
+        app:layout_constraintStart_toStartOf="@+id/home_shots"
+        app:layout_constraintTop_toBottomOf="@+id/home_shots" />
+
+    <TextView
+        android:id="@+id/home_red_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/home_red_cards"
+        app:layout_constraintStart_toStartOf="@+id/home_yellow_cards"
+        app:layout_constraintTop_toBottomOf="@+id/home_yellow_cards" />
+
+    <TextView
+        android:id="@+id/away_yellow_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/away_yellow_cards"
+        app:layout_constraintEnd_toEndOf="@+id/away_shots"
+        app:layout_constraintTop_toBottomOf="@+id/away_shots" />
+
+    <TextView
+        android:id="@+id/away_red_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/away_red_cards"
+        app:layout_constraintEnd_toEndOf="@+id/away_yellow_cards"
+        app:layout_constraintTop_toBottomOf="@+id/away_yellow_cards" />
+
+    <TextView
+        android:id="@+id/home_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/home_manager"
+        app:layout_constraintStart_toStartOf="@+id/home_name"
+        app:layout_constraintTop_toBottomOf="@+id/home_name" />
+
+    <TextView
+        android:id="@+id/away_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/away_manager"
+        app:layout_constraintEnd_toEndOf="@+id/away_name"
+        app:layout_constraintTop_toBottomOf="@+id/away_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,7 @@ class EventRepository private constructor() : BaseRepository<EventRemoteDataSour
         return remoteDataStore?.getDetailEvent(idEvent)
     }
 
-    suspend fun getBadgeTeam(idTeam: String): MutableList<Team>? {
+    suspend fun getTeamDetail(idTeam: String): MutableList<Team>? {
         return remoteDataStore?.getBadgeTeam(idTeam)
     }
 
