@@ -1,24 +1,18 @@
 package com.smk.futbol.ui.search
 
-import android.os.Bundle
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.savedstate.SavedStateRegistryOwner
-import com.smk.futbol.data.EventRepository
+import androidx.lifecycle.ViewModelProvider
+import com.smk.futbol.data.MatchRepository
 
 @Suppress("UNCHECKED_CAST")
 class SearchFactory(
-    savedStateRegistryOwner: SavedStateRegistryOwner, defaultArgs: Bundle,
-    private val eventRepository: EventRepository
-) : AbstractSavedStateViewModelFactory(savedStateRegistryOwner, defaultArgs) {
+    private val matchRepository: MatchRepository
+) : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(
-        key: String,
-        modelClass: Class<T>,
-        handle: SavedStateHandle
-    ): T {
-        return SearchViewModel(eventRepository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(SearchViewModel::class.java))
+            return SearchViewModel(matchRepository) as T
 
+        throw IllegalArgumentException()
     }
 }

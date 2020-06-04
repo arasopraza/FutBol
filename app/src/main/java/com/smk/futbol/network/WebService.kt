@@ -26,7 +26,7 @@ interface WebService {
     ): Response <LeagueResponse>
 
     @GET("lookupevent.php?id")
-    suspend fun getDetailEvent(
+    suspend fun getDetailMatch(
         @Query("id") idEvent: String
     ): Response <EventResponse>
 
@@ -36,7 +36,7 @@ interface WebService {
     ): Response <TeamResponse>
 
     @GET("searchevents.php?e")
-    suspend fun getSearchEvent(
+    suspend fun getSearchMatch(
         @Query("e") Query: String
     ): Response <MatchResponse>
 }

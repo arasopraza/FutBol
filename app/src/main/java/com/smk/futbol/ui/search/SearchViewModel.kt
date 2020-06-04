@@ -4,17 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.smk.futbol.data.EventRepository
-import com.smk.futbol.ui.event.EventViewState
+import com.smk.futbol.data.MatchRepository
+import com.smk.futbol.ui.match.MatchViewState
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val repository: EventRepository) : ViewModel(){
+class SearchViewModel(private val repository: MatchRepository) : ViewModel(){
 
-private var mViewState = MutableLiveData<EventViewState>().apply {
-    value = EventViewState(true)
+private var mViewState = MutableLiveData<MatchViewState>().apply {
+    value = MatchViewState(true)
 }
 
-val searchObservable: LiveData<EventViewState>
+val searchObservable: LiveData<MatchViewState>
     get() = mViewState
 
 fun setSearchMatch(query: String) = viewModelScope.launch {

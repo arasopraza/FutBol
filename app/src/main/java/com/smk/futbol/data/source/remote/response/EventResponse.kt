@@ -1,7 +1,7 @@
 package com.smk.futbol.data.source.remote.response
 
-import com.smk.futbol.data.source.Event
+import com.smk.futbol.model.Match
 
 data class EventResponse(
-    val events: MutableList<Event>
+    val events: MutableList<Match>
 )

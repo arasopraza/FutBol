@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail_event.EventDetailActivity">
+    tools:context=".ui.detailmatch.MatchDetailActivity">
 
     <ProgressBar
         android:id="@+id/loading_detail_event"
@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="@string/date_event"
+        android:text="@string/date_match"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_league" />
@@ -102,7 +102,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="80dp"
         android:text="@string/score_home"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/home_image"
         app:layout_constraintTop_toBottomOf="@+id/date_event" />
 
@@ -113,7 +113,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="60dp"
         android:text="@string/score_away"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@+id/away_image"
         app:layout_constraintTop_toBottomOf="@id/date_event" />
 
@@ -131,106 +131,93 @@
         android:id="@+id/separator_shots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="160dp"
         android:text="@string/total_shots"
-        app:layout_constraintEnd_toStartOf="@+id/vs"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toEndOf="@+id/vs"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/away_score"
+        app:layout_constraintStart_toEndOf="@+id/home_score"
         app:layout_constraintTop_toBottomOf="@+id/vs" />
 
     <TextView
         android:id="@+id/separator_yellow_cards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/yellow_cards"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/separator_shots"
-        app:layout_constraintHorizontal_bias="0.777"
         app:layout_constraintStart_toStartOf="@+id/separator_shots"
-        app:layout_constraintTop_toBottomOf="@+id/separator_shots" />
+        app:layout_constraintTop_toTopOf="@+id/home_yellow_cards" />
 
     <TextView
-        android:id="@+id/separator_red_cards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/red_cards"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/separator_yellow_cards"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="@+id/separator_yellow_cards"
-        app:layout_constraintTop_toBottomOf="@+id/separator_yellow_cards" />
+        app:layout_constraintTop_toTopOf="@+id/home_red_cards" />
 
     <TextView
         android:id="@+id/home_shots"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/home_shots"
+        app:layout_constraintEnd_toStartOf="@+id/separator_shots"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_manager" />
+        app:layout_constraintTop_toTopOf="@+id/separator_shots" />
 
     <TextView
         android:id="@+id/away_shots"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/away_shots"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/away_manager" />
+        app:layout_constraintTop_toTopOf="@id/separator_shots"
+        app:layout_constraintStart_toEndOf="@+id/separator_shots" />
 
     <TextView
         android:id="@+id/home_yellow_cards"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/home_yellow_cards"
+        app:layout_constraintEnd_toEndOf="@+id/home_shots"
         app:layout_constraintStart_toStartOf="@+id/home_shots"
         app:layout_constraintTop_toBottomOf="@+id/home_shots" />
 
     <TextView
         android:id="@+id/home_red_cards"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/home_red_cards"
+        app:layout_constraintEnd_toEndOf="@+id/home_yellow_cards"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/home_yellow_cards"
         app:layout_constraintTop_toBottomOf="@+id/home_yellow_cards" />
 
     <TextView
         android:id="@+id/away_yellow_cards"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/away_yellow_cards"
         app:layout_constraintEnd_toEndOf="@+id/away_shots"
+        app:layout_constraintStart_toStartOf="@+id/away_shots"
         app:layout_constraintTop_toBottomOf="@+id/away_shots" />
 
     <TextView
         android:id="@+id/away_red_cards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/away_red_cards"
         app:layout_constraintEnd_toEndOf="@+id/away_yellow_cards"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/away_yellow_cards"
         app:layout_constraintTop_toBottomOf="@+id/away_yellow_cards" />
-
-    <TextView
-        android:id="@+id/home_manager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/home_manager"
-        app:layout_constraintStart_toStartOf="@+id/home_name"
-        app:layout_constraintTop_toBottomOf="@+id/home_name" />
-
-    <TextView
-        android:id="@+id/away_manager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="@string/away_manager"
-        app:layout_constraintEnd_toEndOf="@+id/away_name"
-        app:layout_constraintTop_toBottomOf="@+id/away_name" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

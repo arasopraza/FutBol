@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.smk.futbol.ui.home.MainActivity.Companion.LEAGUE_ID
 import com.smk.futbol.R
-import com.smk.futbol.data.source.LeagueList
-import com.smk.futbol.ui.detail_league.LeagueDetailActivity
+import com.smk.futbol.model.LeagueDummy
+import com.smk.futbol.ui.detailleague.LeagueDetailActivity
+import com.smk.futbol.ui.league.LeagueFragment.Companion.LEAGUE_ID
 import kotlinx.android.synthetic.main.item_list_league.view.*
 
-class LeagueAdapter(private val listLeague: ArrayList<LeagueList>) :
+class LeagueAdapter(private val listLeague: ArrayList<LeagueDummy>) :
     RecyclerView.Adapter<LeagueAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,7 +31,7 @@ class LeagueAdapter(private val listLeague: ArrayList<LeagueList>) :
         private val name = itemView.text_item_name
         private val image = itemView.image_item
 
-        fun bindItem(items: LeagueList) {
+        fun bindItem(items: LeagueDummy) {
             with(itemView) {
                 Glide.with(itemView.context)
                     .load(items.image)

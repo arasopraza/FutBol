@@ -3,27 +3,21 @@ package com.smk.futbol.ui.home
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.smk.futbol.R
-import com.smk.futbol.data.source.LeagueList
-import com.smk.futbol.ui.league.LeagueAdapter
-import com.smk.futbol.utils.LeagueDummy
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private var list: ArrayList<LeagueList> = arrayListOf()
-
-    companion object {
-        const val LEAGUE_ID = "league_id"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        list.addAll(LeagueDummy.listData)
-        showRecyclerView()
-    }
+        val sectionsPagerAdapter =
+            SectionsPagerAdapter(
+                this,
+                supportFragmentManager
+            )
+        view_pager.adapter = sectionsPagerAdapter
+        tab_layout.setupWithViewPager(view_pager)
 
-    private fun showRecyclerView() {
-        league_list.adapter = LeagueAdapter(list)
     }
 }

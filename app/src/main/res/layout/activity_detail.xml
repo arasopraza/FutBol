@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail_league.LeagueDetailActivity">
+    tools:context=".ui.detailleague.LeagueDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -70,14 +70,14 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
+            style="@style/Widget.MaterialComponents.TabLayout.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/desc_league"
-            app:tabIndicatorColor="@color/colorAccent"
-            style="@style/Widget.MaterialComponents.TabLayout.Colored"/>
+            app:tabIndicatorColor="@color/colorAccent" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
