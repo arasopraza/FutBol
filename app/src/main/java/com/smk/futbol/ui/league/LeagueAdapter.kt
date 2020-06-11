@@ -33,12 +33,10 @@ class LeagueAdapter(private val listLeague: ArrayList<LeagueDummy>) :
 
         fun bindItem(items: LeagueDummy) {
             with(itemView) {
+                name.text = items.name
                 Glide.with(itemView.context)
                     .load(items.image)
                     .into(image)
-
-                name.text = items.name
-
 
                 //intent to another activity
                 itemView.setOnClickListener {

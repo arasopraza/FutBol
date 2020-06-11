@@ -15,7 +15,7 @@ import com.smk.futbol.model.Match
 import com.smk.futbol.ui.detailleague.LeagueDetailActivity
 import com.smk.futbol.ui.match.MatchAdapter
 import com.smk.futbol.ui.match.MatchViewState
-import kotlinx.android.synthetic.main.fragment_match_prev.*
+import kotlinx.android.synthetic.main.fragment_prev_match.*
 
 
 class MatchPrevFragment : Fragment() {
@@ -29,7 +29,7 @@ class MatchPrevFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_match_prev, container, false)
+        return inflater.inflate(R.layout.fragment_prev_match, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

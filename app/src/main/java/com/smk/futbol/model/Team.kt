@@ -1,18 +1,18 @@
 package com.smk.futbol.model
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Team(
-    val idTeam: String,
-    val strGender: String,
-    val strManager: String,
-    val strSport: String,
-    val strTeam: String,
-    val strTeamBadge: String,
-    val strTeamBanner: String,
-    val strTeamJersey: String,
-    val strTeamLogo: String,
-    val strTeamShort: String
+
+    @SerializedName("idTeam")
+    val teamId: String,
+
+    @SerializedName("strTeam")
+    val teamName: String,
+
+    @SerializedName("strTeamBadge")
+    val teamBadge: String
 ): Parcelable

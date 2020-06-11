@@ -1,24 +1,18 @@
 package com.smk.futbol.ui.detailleague
 
-import android.os.Bundle
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.savedstate.SavedStateRegistryOwner
+import androidx.lifecycle.ViewModelProvider
 import com.smk.futbol.data.LeagueRepository
-
 
 @Suppress("UNCHECKED_CAST")
 class LeagueDetailFactory(
-    savedStateRegistryOwner: SavedStateRegistryOwner, defaultArgs: Bundle,
     private val leagueRepository: LeagueRepository
-) : AbstractSavedStateViewModelFactory(savedStateRegistryOwner, defaultArgs) {
+) : ViewModelProvider.Factory {
 
-    override fun <T : ViewModel?> create(
-        key: String,
-        modelClass: Class<T>,
-        handle: SavedStateHandle
-    ): T {
-        return LeagueDetailViewModel(leagueRepository) as T
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(LeagueDetailViewModel::class.java))
+            return LeagueDetailViewModel(leagueRepository) as T
+
+        throw IllegalArgumentException()
     }
 }

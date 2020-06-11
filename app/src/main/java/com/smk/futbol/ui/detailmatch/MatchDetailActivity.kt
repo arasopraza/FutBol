@@ -32,8 +32,8 @@ import java.text.SimpleDateFormat
 class MatchDetailActivity : AppCompatActivity() {
     private lateinit var viewModel: MatchDetailViewModel
     private lateinit var viewModelFactory: ViewModelProvider
-    private lateinit var events: Match
-    private lateinit var eventId: String
+    private lateinit var match: Match
+    private lateinit var matchId: String
     private var isFavorite = false
     private var menuItem: Menu? = null
 
@@ -45,7 +45,7 @@ class MatchDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_match)
 
-        eventId = intent.getStringExtra("EVENT_DETAIL")
+        matchId = intent.getStringExtra("EVENT_DETAIL")
         supportActionBar?.title = getString(R.string.detail_match)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -57,6 +57,7 @@ class MatchDetailActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_favorite, menu)
         this.menuItem = menu
+        setFavorite()
         return true
     }
 
@@ -73,10 +74,8 @@ class MatchDetailActivity : AppCompatActivity() {
                 setFavorite()
                 true
             }
-
             else -> return super.onOptionsItemSelected(item)
         }
-
     }
 
     private fun initObservable() {
@@ -98,100 +97,88 @@ class MatchDetailActivity : AppCompatActivity() {
         if (!viewState?.loading!!) {
             showLoading(false)
         }
-        viewState.data?.let { showEventDetail(it) }
+        viewState.data?.let { showMatchDetail(it) }
         viewState.teamHome?.let { showHomeTeamDetail(it) }
         viewState.teamAway?.let { showAwayTeamDetail(it) }
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun showEventDetail(data: MutableList<Match>) {
-        events = Match(
+    private fun showMatchDetail(data: MutableList<Match>) {
+        match = Match(
             data[0].sport,
-            data[0].dateEvent,
-            data[0].idAwayTeam,
-            data[0].idEvent,
-            data[0].idHomeTeam,
-            data[0].idLeague,
-            data[0].intAwayScore,
-            data[0].intAwayShots,
-            data[0].intHomeScore,
-            data[0].intHomeShots,
-            data[0].strAwayRedCards,
-            data[0].strAwayTeam,
-            data[0].strAwayYellowCards,
-            data[0].strDate,
-            data[0].strEvent,
-            data[0].strHomeRedCards,
-            data[0].strHomeTeam,
-            data[0].strHomeYellowCards,
-            data[0].strLeague
+            data[0].matchDate,
+            data[0].awayId,
+            data[0].matchId,
+            data[0].homeId,
+            data[0].leagueId,
+            data[0].awayScore,
+            data[0].awayShots,
+            data[0].homeScore,
+            data[0].homeShots,
+            data[0].awayRedCards,
+            data[0].awayTeam,
+            data[0].awayYellowCards,
+            data[0].date,
+            data[0].matchName,
+            data[0].homeRedCards,
+            data[0].homeTeam,
+            data[0].homeYellowCards,
+            data[0].leagueName
         )
 
-        viewModel.setHomeTeamDetail(data[0].idHomeTeam)
-        viewModel.setAwayTeamDetail(data[0].idAwayTeam)
+        viewModel.setHomeTeamDetail(data[0].homeId)
+        viewModel.setAwayTeamDetail(data[0].awayId)
 
-        name_league.text = data[0].strLeague
-        name_event.text = data[0].strEvent
-        home_name.text = data[0].strHomeTeam
-        home_score.text = data[0].intHomeScore
-        home_yellow_cards.text = data[0].strHomeYellowCards
+        name_league.text = data[0].leagueName
+        name_event.text = data[0].matchName
+        home_name.text = data[0].homeTeam
+        home_score.text = data[0].homeScore
+        home_yellow_cards.text = data[0].homeYellowCards
 
-        if (data[0].intHomeShots.toString().trim() == "null") {
+        if (data[0].homeShots.toString().trim() == "null") {
             home_shots.text = "-"
         } else {
-            home_shots.text = data[0].intHomeShots
+            home_shots.text = data[0].homeShots
         }
 
-        if (data[0].strHomeRedCards == "null") {
+        if (data[0].homeRedCards == "null") {
             home_red_cards.text = "-"
         } else {
-            home_red_cards.text = data[0].strHomeRedCards
+            home_red_cards.text = data[0].homeRedCards
         }
 
-        away_name.text = data[0].strAwayTeam
-        away_score.text = data[0].intAwayScore
-        away_yellow_cards.text = data[0].strAwayYellowCards
+        away_name.text = data[0].awayTeam
+        away_score.text = data[0].awayScore
+        away_yellow_cards.text = data[0].awayYellowCards
 
-        if (data[0].intAwayShots.toString().trim() == "null") {
+        if (data[0].awayShots.toString().trim() == "null") {
             away_shots.text = "-"
         } else {
-            away_shots.text = data[0].intAwayShots
+            away_shots.text = data[0].awayShots
         }
 
-        if (data[0].strAwayRedCards == "null") {
-            away_red_cards.text = data[0].strAwayRedCards
+        if (data[0].awayRedCards == "null") {
+            away_red_cards.text = data[0].awayRedCards
         } else {
-            away_red_cards.text = data[0].strAwayRedCards
+            away_red_cards.text = data[0].awayRedCards
         }
 
         val parser = SimpleDateFormat("yyyy-mm-dd")
         val formatter = SimpleDateFormat("EEE, dd, mm, yyyy")
-        val date: String = formatter.format(parser.parse(data[0].dateEvent))
+        val date: String = formatter.format(parser.parse(data[0].matchDate))
         date_event.text = date
     }
 
     private fun showHomeTeamDetail(data: MutableList<Team>) {
         Glide.with(this)
-            .load(data[0].strTeamBadge)
+            .load(data[0].teamBadge)
             .into(home_image)
     }
 
     private fun showAwayTeamDetail(data: MutableList<Team>) {
         Glide.with(this)
-            .load(data[0].strTeamBadge)
+            .load(data[0].teamBadge)
             .into(away_image)
-    }
-
-    private fun favoriteState() {
-        database.use {
-            val result = select(Favorite.TABLE_FAVORITE)
-                .whereArgs(
-                    "(EVENT_ID = {id})",
-                    "id" to eventId
-                )
-            val favorite = result.parseList(classParser<Favorite>())
-            if (favorite.isNotEmpty()) isFavorite = true
-        }
     }
 
     private fun addFavorite() {
@@ -199,14 +186,15 @@ class MatchDetailActivity : AppCompatActivity() {
             database.use {
                 insert(
                     Favorite.TABLE_FAVORITE,
-                    Favorite.EVENT_ID to events.idEvent,
-                    Favorite.HOME_NAME to events.strHomeTeam,
-                    Favorite.AWAY_NAME to events.strAwayTeam,
-                    Favorite.HOME_SCORE to events.intHomeScore,
-                    Favorite.AWAY_SCORE to events.intAwayScore
+                    Favorite.MATCH_ID to match.matchId,
+                    Favorite.MATCH_DATE to match.matchDate,
+                    Favorite.HOME_NAME to match.homeTeam,
+                    Favorite.HOME_SCORE to match.homeScore,
+                    Favorite.AWAY_NAME to match.awayTeam,
+                    Favorite.AWAY_SCORE to match.awayScore
                 )
             }
-            Toast.makeText(this, "Added to favorite", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Success Add to Favorite", Toast.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException) {
             Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
         }
@@ -217,10 +205,10 @@ class MatchDetailActivity : AppCompatActivity() {
             database.use {
                 delete(
                     Favorite.TABLE_FAVORITE, "(EVENT_ID = {id})",
-                    "id" to eventId
+                    "id" to matchId
                 )
             }
-            Toast.makeText(this, "Removed from favorite", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Success Removed from Favorite", Toast.LENGTH_SHORT).show()
         } catch (e: SQLiteConstraintException) {
             Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
         }
@@ -233,6 +221,18 @@ class MatchDetailActivity : AppCompatActivity() {
         else
             menuItem?.getItem(0)?.icon =
                 ContextCompat.getDrawable(this, R.drawable.ic_star_border_black_24dp)
+    }
+
+    private fun favoriteState() {
+        database.use {
+            val result = select(Favorite.TABLE_FAVORITE)
+                .whereArgs(
+                    "(EVENT_ID = {id})",
+                    "id" to matchId
+                )
+            val favorite = result.parseList(classParser<Favorite>())
+            if (favorite.isNotEmpty()) isFavorite = true
+        }
     }
 
     private fun showLoading(state: Boolean) {

@@ -8,11 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smk.futbol.R
 import com.smk.futbol.model.Match
 import com.smk.futbol.ui.detailmatch.MatchDetailActivity
-import com.smk.futbol.ui.detailmatch.MatchDetailActivity.Companion.EVENT_DETAIL
 import kotlinx.android.synthetic.main.item_list_match.view.*
 
 class MatchAdapter : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
-    private val listEvent = mutableListOf<Match>()
+    private val listMatch = mutableListOf<Match>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -20,18 +19,15 @@ class MatchAdapter : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = listEvent.size
+    override fun getItemCount(): Int = listMatch.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(listEvent[position])
+        holder.bindItem(listMatch[position])
     }
 
     fun setEvent(data: MutableList<Match>) {
-        val dataFootball = data.filter {
-            it.sport == "Soccer"
-        }
-        listEvent.clear()
-        listEvent.addAll(dataFootball)
+        listMatch.clear()
+        listMatch.addAll(data)
         notifyDataSetChanged()
     }
 
@@ -44,20 +40,19 @@ class MatchAdapter : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
 
         fun bindItem(items: Match) {
             with(itemView) {
-                nameHome.text = items.strHomeTeam
-                scoreHome.text = items.intHomeScore
-                nameAway.text = items.strAwayTeam
-                scoreAway.text = items.intAwayScore
-                dateEvent.text = items.strDate
+                nameHome.text = items.homeTeam
+                scoreHome.text = items.homeScore
+                nameAway.text = items.awayTeam
+                scoreAway.text = items.awayScore
+                dateEvent.text = items.date
 
                 //intent to another activity
                 itemView.setOnClickListener {
                     val intent = Intent(context, MatchDetailActivity::class.java).apply {
-                        putExtra("EVENT_DETAIL", items.idEvent)
+                        putExtra("EVENT_DETAIL", items.matchId)
                     }
                     context.startActivity(intent)
                 }
-
             }
         }
     }

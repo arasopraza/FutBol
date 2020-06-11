@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.smk.futbol.R
 import com.smk.futbol.model.Favorite
 import com.smk.futbol.data.source.local.database
-import kotlinx.android.synthetic.main.fragment_match_prev.*
+import kotlinx.android.synthetic.main.fragment_prev_match.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 

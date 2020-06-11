@@ -24,7 +24,8 @@ class DatabaseHelper(context: Context): ManagedSQLiteOpenHelper(context, "Favori
         db.createTable(
             Favorite.TABLE_FAVORITE, true,
             Favorite.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-            Favorite.EVENT_ID to TEXT + UNIQUE,
+            Favorite.MATCH_ID to TEXT + UNIQUE,
+            Favorite.MATCH_DATE to TEXT,
             Favorite.HOME_NAME to TEXT,
             Favorite.AWAY_NAME to TEXT,
             Favorite.HOME_SCORE to TEXT,

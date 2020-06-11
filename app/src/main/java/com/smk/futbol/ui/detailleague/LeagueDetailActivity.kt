@@ -19,7 +19,7 @@ import com.smk.futbol.model.League
 import com.smk.futbol.ui.league.LeagueFragment.Companion.LEAGUE_ID
 import com.smk.futbol.ui.search.SearchActivity
 import com.smk.futbol.ui.search.SearchActivity.Companion.QUERY_MATCH
-import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.activity_detail_league.*
 
 @Suppress(
     "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS",
@@ -32,7 +32,7 @@ class LeagueDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(R.layout.activity_detail_league)
 
         supportActionBar?.title = getString(R.string.detail_league)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -87,8 +87,8 @@ class LeagueDetailActivity : AppCompatActivity() {
     private fun initObservable() {
         val idLeague = intent.getStringExtra(LEAGUE_ID)
         viewModelFactory = ViewModelProvider(
-            this, LeagueDetailFactory
-                (this, Bundle(), LeagueRepository.instance)
+            this,
+            LeagueDetailFactory(LeagueRepository.instance)
         )
         viewModel = viewModelFactory[LeagueDetailViewModel::class.java].apply {
             leagueObservable.observe(

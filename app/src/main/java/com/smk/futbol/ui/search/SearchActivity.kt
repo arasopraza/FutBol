@@ -71,11 +71,13 @@ class SearchActivity : AppCompatActivity() {
         viewState.let {
             it.data?.let { data -> showRecyclerView(data) }
         }
-
     }
 
     private fun showRecyclerView(data: MutableList<Match>) {
-        adapter.setEvent(data)
+        val dataFootball = data.filter {
+            it.sport == "Soccer"
+        }
+        adapter.setEvent(dataFootball as MutableList<Match>)
     }
 
     private fun showLoading(state: Boolean) {

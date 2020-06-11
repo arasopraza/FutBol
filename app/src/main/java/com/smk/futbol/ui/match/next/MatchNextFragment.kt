@@ -15,7 +15,7 @@ import com.smk.futbol.model.Match
 import com.smk.futbol.ui.detailleague.LeagueDetailActivity
 import com.smk.futbol.ui.match.MatchAdapter
 import com.smk.futbol.ui.match.MatchViewState
-import kotlinx.android.synthetic.main.fragment_match_next.*
+import kotlinx.android.synthetic.main.fragment_next_match.*
 
 class MatchNextFragment : Fragment() {
 
@@ -28,7 +28,7 @@ class MatchNextFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_match_next, container, false)
+        return inflater.inflate(R.layout.fragment_next_match, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

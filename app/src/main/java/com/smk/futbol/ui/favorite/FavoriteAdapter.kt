@@ -25,6 +25,7 @@ class FavoriteAdapter(private val favorite: List<Favorite>) : RecyclerView.Adapt
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val eventDate = itemView.date_event
         private val nameHome = itemView.home_name
         private val nameAway = itemView.away_name
         private val scoreHome = itemView.home_score
@@ -32,6 +33,7 @@ class FavoriteAdapter(private val favorite: List<Favorite>) : RecyclerView.Adapt
 
         fun bindItem(items: Favorite) {
             with(itemView) {
+                eventDate.text = items.matchDate
                 nameHome.text = items.homeName
                 scoreHome.text = items.homeScore
                 nameAway.text = items.awayName
@@ -40,11 +42,10 @@ class FavoriteAdapter(private val favorite: List<Favorite>) : RecyclerView.Adapt
 //            intent to another activity
                 itemView.setOnClickListener {
                     val intent = Intent(context, MatchDetailActivity::class.java).apply {
-                        putExtra("EVENT_DETAIL", items.eventId)
+                        putExtra("EVENT_DETAIL", items.matchId)
                     }
                     context.startActivity(intent)
                 }
-
             }
         }
     }
